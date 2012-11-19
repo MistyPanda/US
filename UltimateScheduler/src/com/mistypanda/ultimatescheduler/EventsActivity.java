@@ -2,8 +2,11 @@ package com.mistypanda.ultimatescheduler;
 
 
 import android.app.ListActivity;
+import android.content.Intent;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 
 
 public class EventsActivity extends ListActivity {
@@ -29,8 +32,11 @@ public class EventsActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
  
 		//get selected items
-		Event selectedEvent= event[position];
-		Intent viewEventIntent = new Intent(this,ViewEvent.class);
+		Event selectedEvent= events[position];
+		Intent viewEventIntent = new Intent(this, EventActivity.class);
+		//add event to intent.
+		//call intent.
+		//how to retrieve event from intent?
 		String selectedValue = (String) getListAdapter().getItem(position);
 		//Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
  

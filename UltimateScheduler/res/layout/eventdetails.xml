@@ -66,14 +66,4 @@
         android:text="Details"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/Host"
-        android:layout_marginRight="48dp"
-        android:contentDescription="createClick"
-        android:text="Create Event" />
-
 </RelativeLayout>

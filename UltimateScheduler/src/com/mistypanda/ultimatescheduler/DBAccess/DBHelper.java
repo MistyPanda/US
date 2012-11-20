@@ -105,6 +105,7 @@ public class DBHelper {
 				int version = json_data.getInt("eVersion");
 				
 				event = new Event(eID, eventName, location, host, startDate, endDate, info, version);
+				eventList.add(event);
 			}
 		}
 		catch(JSONException je){

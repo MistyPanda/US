@@ -26,39 +26,12 @@ public final class R {
         public static final int next=0x7f080003;
         public static final int previous=0x7f080001;
         public static final int title=0x7f080002;
-        public static final int LinearLayout1=0x7f070013;
-        public static final int ListView1=0x7f07000c;
-        public static final int RelativeLayout1=0x7f070001;
-        public static final int TextView01=0x7f070009;
-        public static final int TextView02=0x7f070007;
-        public static final int TextView03=0x7f070005;
-        public static final int background=0x7f070012;
-        public static final int button1=0x7f07000b;
-        public static final int date=0x7f070010;
-        public static final int eventname=0x7f07000d;
-        public static final int frameLayersLayout=0x7f070011;
-        public static final int label=0x7f07000e;
-        public static final int location=0x7f07000f;
-        public static final int menu_settings=0x7f070015;
-        public static final int newEventDate=0x7f070008;
-        public static final int newEventDetails=0x7f07000a;
-        public static final int newEventLocation=0x7f070006;
-        public static final int newEventName=0x7f070004;
-        public static final int pager=0x7f070000;
-        public static final int textView1=0x7f070002;
-        public static final int textView2=0x7f070003;
-        public static final int textView3=0x7f070014;
     }
     public static final class layout {
         public static final int activity_calendar=0x7f030000;
         public static final int activity_create_event=0x7f030001;
         public static final int activity_events=0x7f030002;
         public static final int activity_home=0x7f030003;
-        public static final int createactivity=0x7f030004;
-        public static final int eventlist=0x7f030005;
-        public static final int eventlistview=0x7f030006;
-        public static final int homepage=0x7f030007;
-        public static final int viewevent=0x7f030008;
     }
     public static final class menu {
         public static final int activity_home=0x7f070000;
@@ -78,17 +51,6 @@ public final class R {
         public static final int title_section1=0x7f050003;
         public static final int title_section2=0x7f050002;
         public static final int title_section3=0x7f050001;
-        public static final int app_name=0x7f040000;
-        public static final int copyright=0x7f04000a;
-        public static final int hello_world=0x7f040004;
-        public static final int menu_choice1=0x7f040007;
-        public static final int menu_choice2=0x7f040008;
-        public static final int menu_choice3=0x7f040009;
-        public static final int menu_settings=0x7f040005;
-        public static final int title_activity_home=0x7f040006;
-        public static final int title_section1=0x7f040003;
-        public static final int title_section2=0x7f040002;
-        public static final int title_section3=0x7f040001;
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;

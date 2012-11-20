@@ -14,8 +14,7 @@ public class HomeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-<<<<<<< HEAD
-=======
+
         // Create the adapter that will return a fragment for each of the three primary sections
         // of the app.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -48,7 +47,7 @@ public class HomeActivity extends Activity {
                            .setText(mSectionsPagerAdapter.getPageTitle(i))
                            .setTabListener(this));
         }
->>>>>>> 32348e3620e92b7f45325891fb7b19852bdb15c7
+
     }
 
     @Override
@@ -57,7 +56,6 @@ public class HomeActivity extends Activity {
         return true;
     }
     
-<<<<<<< HEAD
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
     	Intent intent = new Intent(this, CalendarActivity.class);
@@ -130,6 +128,6 @@ public class HomeActivity extends Activity {
             textView.setText(Integer.toString(args.getInt(ARG_SECTION_NUMBER)));
             return textView;
         }
->>>>>>> 32348e3620e92b7f45325891fb7b19852bdb15c7
+
     }
 }

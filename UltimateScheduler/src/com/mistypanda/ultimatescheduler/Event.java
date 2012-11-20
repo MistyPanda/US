@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.mistypanda.ultimatescheduler;
 
 import org.joda.time.DateTime;
@@ -19,7 +18,7 @@ public class Event {
 	DateTime endDate;
 	String Info;
 	int Version;
-	MediaAlbum mediaAlbum;
+	//MediaAlbum mediaAlbum;
 	
 	/**
 	 * 
@@ -35,7 +34,7 @@ public class Event {
 		this.endDate = endDate;
 		this.Info = info;
 		this.Version = version;
-		mediaAlbum = new MediaAlbum();
+		//mediaAlbum = new MediaAlbum();
 	}
 	
 	/**
@@ -148,5 +147,3 @@ public class Event {
 	public boolean getVideo(){	return false;	}
 	public boolean publishEvent(){return false;	}
 }
-=======
->>>>>>> 32348e3620e92b7f45325891fb7b19852bdb15c7

@@ -32,6 +32,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 		location.setText(events.get(position).getLocation());
 		date.setText(events.get(position).getStartDate().toString());
 		
+
 		
 		return rowView;
 		

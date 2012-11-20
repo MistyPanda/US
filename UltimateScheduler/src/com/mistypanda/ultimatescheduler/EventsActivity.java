@@ -16,13 +16,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
-	List<Event> events; 
 public class EventsActivity extends Activity// extends ListActivity 
 {
 	
+	List<Event> events= new ArrayList<Event>(); 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class EventsActivity extends Activity// extends ListActivity
 	    			
 	    			viewEventIntent.putExtra("Event", selectedEvent);
 	    			startActivity(viewEventIntent);
+	    		  
 	    	  }
 	    	}); 
 	    // TODO Auto-generated method stub
@@ -65,7 +67,6 @@ public class EventsActivity extends Activity// extends ListActivity
 	    
 	}
 	
-	@Override
 	//@Override
 	public void addEventClick(View view){
 		Intent intent = new Intent(this, CreateEventActivity.class);

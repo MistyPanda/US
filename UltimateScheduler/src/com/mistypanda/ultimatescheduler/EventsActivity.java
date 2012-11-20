@@ -2,6 +2,7 @@ package com.mistypanda.ultimatescheduler;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
@@ -19,6 +20,7 @@ public class EventsActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    /*
 	    try {
 			setUpEvents();
 		} catch (InterruptedException e) {
@@ -28,8 +30,11 @@ public class EventsActivity extends ListActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	    
+	    */
 	    try{
 	   //events = (Event[])DBHelper.getAllEvents().toArray();
 	   

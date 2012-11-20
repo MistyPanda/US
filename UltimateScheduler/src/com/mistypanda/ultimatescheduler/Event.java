@@ -18,7 +18,7 @@ public class Event {
 	DateTime endDate;
 	String Info;
 	int Version;
-	//MediaAlbum mediaAlbum;
+	MediaAlbum mediaAlbum;
 	
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class Event {
 		this.endDate = endDate;
 		this.Info = info;
 		this.Version = version;
-		//mediaAlbum = new MediaAlbum();
+		mediaAlbum = new MediaAlbum();
 	}
 	
 	/**

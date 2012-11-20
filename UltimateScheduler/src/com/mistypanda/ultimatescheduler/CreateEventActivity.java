@@ -17,9 +17,9 @@ public class CreateEventActivity extends Activity {
 	}
 	
 	public void createClick(View view){
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		//LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View rowView=inflater.inflate(R.layout.eventlistview,parent, false);
+	//	View rowView=inflater.inflate(R.layout.eventlistview,parent, false);
 		
 		
 	}

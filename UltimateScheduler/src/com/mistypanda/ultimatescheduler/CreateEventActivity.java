@@ -28,7 +28,7 @@ public class CreateEventActivity extends Activity {
 		EditText info = (EditText)findViewById(R.id.createEventInfo);
 		
 		
-		Intent intent = new Intent(this, EventList.class);
+		Intent intent = new Intent(this, EventsActivity.class);
 		startActivity(intent);
 	//	View rowView=inflater.inflate(R.layout.eventlistview,parent, false);
 		

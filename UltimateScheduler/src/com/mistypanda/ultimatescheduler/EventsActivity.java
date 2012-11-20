@@ -18,10 +18,18 @@ public class EventsActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+<<<<<<< HEAD
 	    try{
 	   //events = (Event[])DBHelper.getAllEvents().toArray();
 	   
 	   events = DBHelper.getAllEvents();
+=======
+	    
+	    
+	    
+	    for (int i=0;i<3;i++){
+	    	events[i] = new Event(1, "Name ", "" + i, "location " + i , i + "/10/1020");
+>>>>>>> 5dafe87db2615183a4a82df9ecce96712b6613f1
 	    }
 	    catch(Exception e){
 	    	System.out.println(e.getMessage());	

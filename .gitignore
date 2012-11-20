@@ -16,3 +16,5 @@ gen/
 local.properties
 # temporary files
 *~
+# .ds_store files
+*.DS_Store

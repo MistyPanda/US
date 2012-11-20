@@ -20,11 +20,18 @@ public class EventDetailsActivity extends Activity {
 	   setContentView(R.layout.eventdetails);
 	   
 	   TextView name = (TextView) findViewById(R.id.eventNameDetails);
+	   name.setText(event.getEventName());
 	   TextView location = (TextView) findViewById(R.id.location);
+	   location.setText(event.getLocation());
 	   TextView host = (TextView) findViewById(R.id.Host);
-	   TextView StartDate = (TextView) findViewById(R.id.StartDate);
-	   TextView EndDate = (TextView) findViewById(R.id.EndDate);
-	   TextView Info = (TextView) findViewById(R.id.Info);
+	   host.setText(event.getHost());
+	   TextView startDate = (TextView) findViewById(R.id.StartDate);
+	   startDate.setText(event.getStartDate().toString());
+	   TextView endDate = (TextView) findViewById(R.id.EndDate);
+	   endDate.setText(event.getLocation());
+	   
+	   TextView info = (TextView) findViewById(R.id.Info);
+	   info.setText(event.getInfo());
 	}
 	
 

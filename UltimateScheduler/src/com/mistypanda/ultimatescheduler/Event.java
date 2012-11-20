@@ -1,5 +1,7 @@
 package com.mistypanda.ultimatescheduler;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 
 /**
@@ -9,7 +11,7 @@ import org.joda.time.DateTime;
  * @author kahorton, Senai Mesfin
  *
  */
-public class Event {
+public class Event implements Serializable{
 	int ID;
 	String EventName;
 	String Location;

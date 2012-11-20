@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.mistypanda.ultimatescheduler;
 
 import org.joda.time.DateTime;
@@ -147,3 +148,5 @@ public class Event {
 	public boolean getVideo(){	return false;	}
 	public boolean publishEvent(){return false;	}
 }
+=======
+>>>>>>> 32348e3620e92b7f45325891fb7b19852bdb15c7

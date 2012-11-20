@@ -1,5 +1,7 @@
 package com.mistypanda.ultimatescheduler;
 
+import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class EventListAdapter extends ArrayAdapter<Event> {
-	private final Event[] events;
+	private final List<Event> events;
 	private final Context context;
 	
-	public EventListAdapter(Context context, Event[] events){
+	public EventListAdapter(Context context, List<Event> events){
 		super(context, R.layout.eventlistview, events);
 		this.context=context;
 		this.events=events;
@@ -26,9 +28,9 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 		TextView location = (TextView) rowView.findViewById(R.id.location);
 		TextView date = (TextView) rowView.findViewById(R.id.date);
 		
-		eventName.setText(events[position].getName());
-		location.setText(events[position].getLocation());
-		date.setText(events[position].getDate());
+		eventName.setText(events.get(position).getEventName());
+		location.setText(events.get(position).getLocation());
+		date.setText(events.get(position).getStartDate().toString());
 		
 		
 		return rowView;

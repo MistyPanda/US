@@ -67,7 +67,9 @@ public class DBHelper {
 				event = new Event(eID, eventName, location, host, startDate, endDate, info, version);
 			}
 		}
-		catch(JSONException je){}
+		catch(JSONException je){
+			System.out.println(je.toString());
+		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
 		}
@@ -103,9 +105,12 @@ public class DBHelper {
 				int version = json_data.getInt("eVersion");
 				
 				event = new Event(eID, eventName, location, host, startDate, endDate, info, version);
+				eventList.add(event);
 			}
 		}
-		catch(JSONException je){}
+		catch(JSONException je){
+			System.out.println(je.toString());
+		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
 		}

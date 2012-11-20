@@ -1,42 +1,46 @@
 package com.mistypanda.ultimatescheduler;
 
+import org.joda.time.DateTime;
+
 /**
  * Event class of the US will contain information about the events 
  * attributes include:id, name, location, time, daterange, info, contact, phonenumber
  * methods are: getphoto, getvideo, publishevent
- * @author kahorton
+ * @author kahorton, Senai Mesfin
  *
  */
 public class Event {
 	int ID;
 	String EventName;
 	String Location;
-	String startDate;
-	String endDate;
-	String Info;
 	String Host;
+	DateTime startDate;
+	DateTime endDate;
+	String Info;
+	int Version;
 	MediaAlbum mediaAlbum;
 	
 	/**
 	 * 
 	 */
-	public Event(int iD, String eventName, String location, String startDate,
-			String endDate, String info, String host) {
+	public Event(int iD, String eventName, String location, String host, DateTime startDate,
+			DateTime endDate, String info, int version) {
 		
-		ID = iD;
-		EventName = eventName;
-		Location = location;
+		this.ID = iD;
+		this.EventName = eventName;
+		this.Location = location;
+		this.Host = host;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		Info = info;
-		Host = host;
+		this.Info = info;
+		this.Version = version;
 		mediaAlbum = new MediaAlbum();
 	}
 	
 	/**
 	 * @return the iD
 	 */
-	private int getID() {
+	public int getID() {
 		return ID;
 	}
 
@@ -50,7 +54,7 @@ public class Event {
 	/**
 	 * @return the eventName
 	 */
-	private String getEventName() {
+	public String getEventName() {
 		return EventName;
 	}
 
@@ -64,7 +68,7 @@ public class Event {
 	/**
 	 * @return the location
 	 */
-	private String getLocation() {
+	public String getLocation() {
 		return Location;
 	}
 
@@ -75,12 +79,10 @@ public class Event {
 		Location = location;
 	}
 
-
-
 	/**
 	 * @return the info
 	 */
-	private String getInfo() {
+	public String getInfo() {
 		return Info;
 	}
 
@@ -94,35 +96,35 @@ public class Event {
 	/**
 	 * @return the startDate
 	 */
-	private String getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
 	/**
 	 * @param startDate the startDate to set
 	 */
-	private void setStartDate(String startDate) {
+	private void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	/**
 	 * @return the endDate
 	 */
-	private String getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
 	/**
 	 * @param endDate the endDate to set
 	 */
-	private void setEndDate(String endDate) {
+	private void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
 	/**
 	 * @return the host
 	 */
-	private String getHost() {
+	public String getHost() {
 		return Host;
 	}
 
@@ -131,6 +133,14 @@ public class Event {
 	 */
 	private void setHost(String host) {
 		Host = host;
+	}
+	
+	public int getVersion(){
+		return Version;
+	}
+	
+	public void setVersion(int version){
+		Version = version;
 	}
 
 	public boolean getPhoto(){	return false;	}

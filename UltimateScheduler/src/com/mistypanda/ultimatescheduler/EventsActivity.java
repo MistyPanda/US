@@ -1,13 +1,13 @@
 package com.mistypanda.ultimatescheduler;
 
-import android.app.Activity;
+
 import android.app.ListActivity;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
-public class EventsActivity extends Activity {
 
 public class EventsActivity extends ListActivity {
 	Event [] events = new Event[3];
@@ -15,7 +15,6 @@ public class EventsActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	
 	    
 	    
 	    
@@ -26,8 +25,8 @@ public class EventsActivity extends ListActivity {
 	    EventListAdapter eventAdapter = new EventListAdapter(this,events);
 	    setListAdapter(eventAdapter);
 	    // TODO Auto-generated method stub
+	    
 	}
-
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {

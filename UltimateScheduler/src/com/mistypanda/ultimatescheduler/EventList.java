@@ -1,6 +1,5 @@
 package com.mistypanda.ultimatescheduler;
 
-public class EventList {
 import java.util.ArrayList;
 
 public class EventList {

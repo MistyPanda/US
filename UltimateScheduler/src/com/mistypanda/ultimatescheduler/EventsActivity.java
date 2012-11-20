@@ -19,7 +19,7 @@ public class EventsActivity extends ListActivity {
 	    
 	    
 	    for (int i=0;i<3;i++){
-	    	events[i] = new Event("Eventss " + i, "location " + i , i + "/10/1020");
+	    	events[i] = new Event(1, "Name ", "" + i, "location " + i , i + "/10/1020");
 	    }
 
 	    EventListAdapter eventAdapter = new EventListAdapter(this,events);

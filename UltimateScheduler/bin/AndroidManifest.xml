@@ -12,7 +12,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".HomeActivity"
             android:name=".HomePageActivity"
             android:label="@string/title_activity_home" >
             <intent-filter>

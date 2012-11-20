@@ -12,7 +12,6 @@ public class CreateEventActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	
 	    setContentView(R.layout.createactivity);
 	    // TODO Auto-generated method stub
 	}

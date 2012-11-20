@@ -1,6 +1,7 @@
 package com.mistypanda.ultimatescheduler;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
@@ -18,18 +19,21 @@ public class EventsActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-<<<<<<< HEAD
+	    try {
+			setUpEvents();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+		}
+	    
 	    try{
 	   //events = (Event[])DBHelper.getAllEvents().toArray();
 	   
 	   events = DBHelper.getAllEvents();
-=======
-	    
-	    
-	    
-	    for (int i=0;i<3;i++){
-	    	events[i] = new Event(1, "Name ", "" + i, "location " + i , i + "/10/1020");
->>>>>>> 5dafe87db2615183a4a82df9ecce96712b6613f1
 	    }
 	    catch(Exception e){
 	    	System.out.println(e.getMessage());	
@@ -39,6 +43,7 @@ public class EventsActivity extends ListActivity {
 	   EventListAdapter eventAdapter = new EventListAdapter(this,events);
 	    setListAdapter(eventAdapter);
 	    // TODO Auto-generated method stub
+	     
 	    
 	}
 	
@@ -54,6 +59,10 @@ public class EventsActivity extends ListActivity {
 		//String selectedValue = (String) getListAdapter().getItem(position);
 		//Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
  
+	}
+	
+	private void setUpEvents(){
+		
 	}
 	
 	

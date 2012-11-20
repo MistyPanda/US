@@ -119,34 +119,13 @@ public class DBHelper {
 		return eventList;
 	}
 	
-	public Boolean addEvent(String eNam, String loc, String host, DateTime sDat,
-			DateTime eDat, String info){
+	public static void addEvent(String eNam, String loc, String host, String sDat,
+			String eDat, String info) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
 		
 		// Start background thread to access the database through php
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
-				+"&loc="+loc
-				+"&host="+host
-				+"&start="+sDat.toString()
-				+"&end="+eDat.toString()
-				+"&info="+info);
-		try {
-			task.get(2000, TimeUnit.MILLISECONDS);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info);
 		
-		return true;
 	}
 
 	

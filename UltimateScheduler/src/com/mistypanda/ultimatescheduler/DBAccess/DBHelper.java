@@ -118,6 +118,36 @@ public class DBHelper {
 		// Return the list of all events in the external database.
 		return eventList;
 	}
+	
+	public Boolean addEvent(String eNam, String loc, String host, DateTime sDat,
+			DateTime eDat, String info){
+		FetchTask task = new FetchTask();
+		
+		// Start background thread to access the database through php
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
+				+"&loc="+loc
+				+"&host="+host
+				+"&start="+sDat.toString()
+				+"&end="+eDat.toString()
+				+"&info="+info);
+		try {
+			task.get(2000, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 
 	
 	/** Parses a string in the format of a MySQL DATETIME and turns it into a DateTime.

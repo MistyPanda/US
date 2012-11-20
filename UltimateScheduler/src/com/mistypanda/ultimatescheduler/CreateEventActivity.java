@@ -23,6 +23,7 @@ public class CreateEventActivity extends Activity {
 		EditText name = (EditText)findViewById(R.id.createEventName);
 		EditText startDate = (EditText)findViewById(R.id.createEventStartDate);
 		EditText endDate = (EditText)findViewById(R.id.createEventEndDate);
+		EditText host = (EditText)findViewById(R.id.createEventHost);
 		EditText location = (EditText)findViewById(R.id.createEventLocation);
 		EditText info = (EditText)findViewById(R.id.createEventInfo);
 		

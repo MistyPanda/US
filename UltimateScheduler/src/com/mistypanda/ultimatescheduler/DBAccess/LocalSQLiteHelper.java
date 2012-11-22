@@ -18,6 +18,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+/** This database helper is the local copy of the exernal database. Use this DB helper
+ * in order to grab data for all activities. 
+ * @author Senai Mesfin
+ *
+ */
 public class LocalSQLiteHelper extends SQLiteOpenHelper{
 
 	private static final String DATABASE_NAME = "events.db";

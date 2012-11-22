@@ -3,6 +3,8 @@ package com.mistypanda.ultimatescheduler;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
@@ -26,23 +28,25 @@ public class EventsActivity extends Activity// extends ListActivity
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.eventlist);
+
+	   //events = (Event[])DBHelper.getAllEvents().toArray();
+		setContentView(R.layout.eventlist);
 	    LayoutInflater inflater = getLayoutInflater();
 	    //LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.eventlist,null);
 	    ListView listView = (ListView)findViewById(R.id.eventlistviewer);
 	   
 	    try{
-	   events = DBHelper.getAllEvents();
-	    	//events.add(DBHelper.getEventByEventID(1));
-	    }	   
-	 
+	 	   events = DBHelper.getAllEvents();
+	 	    	//events.add(DBHelper.getEventByEventID(1));
+	 	    }	   
 
-	    
-	    
-	
-	    catch(Exception e){
-	    	System.out.println(e.getMessage());	
-	    }
+
+
+
+
+	 	    catch(Exception e){
+	 	    	System.out.println(e.getMessage());	
+	 	    }
 	    
 	    //System.out.println(events.get(0).getLocation());
 	   EventListAdapter eventAdapter = new EventListAdapter(this,events);
@@ -59,6 +63,7 @@ public class EventsActivity extends Activity// extends ListActivity
 	    	  }
 	    	}); 
 	    // TODO Auto-generated method stub
+	     
 	    
 	}
 	
@@ -83,6 +88,10 @@ public class EventsActivity extends Activity// extends ListActivity
 		//String selectedValue = (String) getListAdapter().getItem(position);
 		//Toast.makeText(this, selectedValue, Toast.LENGTH_SHORT).show();
  
+	}
+	
+	private void setUpEvents(){
+		
 	}
 	
 	

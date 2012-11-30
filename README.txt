@@ -11,4 +11,5 @@ $> git remote add upstream https://github.com/MistyPanda/US.git
 this will add the remote 'upstream' to your local repository.
 then to get changes from the group repo use the command:
 $> git fetch upstream
+$> git merge upstream/Master
 good luck

@@ -1,4 +1,4 @@
-package com.mistypanda.ultimatescheduler;
+package com.mistypanda.ultimatescheduler.activity;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.mistypanda.ultimatescheduler.R;
 import com.mistypanda.ultimatescheduler.DBAccess.*;
+import com.mistypanda.ultimatescheduler.R.id;
+import com.mistypanda.ultimatescheduler.R.layout;
 
 public class CreateEventActivity extends Activity {
 

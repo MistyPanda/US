@@ -33,7 +33,7 @@ public class EventsActivity extends Activity// extends ListActivity
 		setContentView(R.layout.eventlist);
 	    LayoutInflater inflater = getLayoutInflater();
 	    //LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.eventlist,null);
-	    ListView listView = (ListView)findViewById(R.id.eventlistviewer);
+	    ListView listView = (ListView)findViewById(R.id.eventListView);
 	   
 	    try{
 	 	   events = DBHelper.getAllEvents();

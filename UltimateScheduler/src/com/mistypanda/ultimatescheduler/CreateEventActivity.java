@@ -139,9 +139,10 @@ public class CreateEventActivity extends Activity {
 		String eStart = null;	/*= startDate.getText().toString();*/
 		String eEnd = null;	/*= endDate.getText().toString();*/
 		String descrip = description.getText().toString();
+		String password = "";//TO-DO
 		
 		try {
-			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip);
+			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip, password);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

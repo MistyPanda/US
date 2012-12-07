@@ -1,117 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/scroll" android:layout_width="fill_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true">
+  
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:id="@+id/eventDetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#98AFC7"
+    android:orientation="vertical"
     tools:context=".CreateEventActivity" >
 
-    <LinearLayout
-        android:id="@+id/fieldwrapper"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:text="Create Your Event"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/eventNameET"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_marginTop="8dp"
+        android:hint="Event Name"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/locationET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:hint="Location"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/eventHostET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:hint="Host"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/descriptionET"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dip"
+        android:gravity="center_vertical|top"
+        android:hint="Event Description"
+        android:padding="5dp"
+        android:textColorHint="@color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/myStartDateButton"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:text="Start Date" />
 
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Avent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/TextView02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Location"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/TextView05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Host"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventHost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
-
-        <TextView
-            android:id="@+id/TextView04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Start Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventStartDate"
+            android:id="@+id/showStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:layout_weight="0.00"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/myEndDateButton"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:text="End Date" />
 
         <TextView
-            android:id="@+id/TextView03"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="End Date"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventEndDate"
+            android:id="@+id/showEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" />
+            android:layout_weight="0.00"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/startTime"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:text="Start Time" />
 
         <TextView
-            android:id="@+id/TextView01"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Details"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/createEventInfo"
+            android:id="@+id/showStartTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textMultiLine" />
+            android:layout_weight="0.00"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/endTime"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:text="End Time" />
+
+        <TextView
+            android:id="@+id/showEndTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.00"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmallPopupMenu"
+            android:textColorHint="@color/black"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/createEventButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:contentDescription="createClick"
+        android:layout_marginTop="5dip"
         android:onClick="createClick"
-        android:text="Create Event" />
-
+        android:padding="5dp"
+        android:text="Add Event" />
 </LinearLayout>
+
+
+
+</ScrollView>

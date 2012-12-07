@@ -23,7 +23,6 @@ import com.mistypanda.ultimatescheduler.Event;
  * accordingly. In order to access the information pulled from the database the 
  * wrapper classes need to call methods of the DBHelper.
  * @author Senai Mesfin
- *
  */
 public class DBHelper {
 	
@@ -77,6 +76,12 @@ public class DBHelper {
 		return event;
 	}
 	
+	/**
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
 	public static List<Event> getAllEvents() throws InterruptedException, ExecutionException, TimeoutException{
 		List<Event> eventList = new ArrayList<Event>();
 		FetchTask task = new FetchTask();
@@ -119,15 +124,65 @@ public class DBHelper {
 		return eventList;
 	}
 	
+	
+	/**
+	 * @param eNam
+	 * @param loc
+	 * @param host
+	 * @param sDat
+	 * @param eDat
+	 * @param info
+	 * @param password
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
 	public static void addEvent(String eNam, String loc, String host, String sDat,
-			String eDat, String info) throws InterruptedException, ExecutionException, TimeoutException{
+			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
 		
 		// Start background thread to access the database through php
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info);
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
+				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		
 		
 	}
 
+	/**
+	 * @param eID
+	 * @param password
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static Boolean deleteEvent(int eID, String password) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deleteEvent.php?id="+eID+"&pass="+password);
+		return false;
+	}
+	
+	/**
+	 * @param eID
+	 * @param eNam
+	 * @param loc
+	 * @param host
+	 * @param sDat
+	 * @param eDat
+	 * @param info
+	 * @param password
+	 * @return
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static Boolean updateEvent(int eID, String eNam, String loc, String host, String sDat,
+			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
+				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		return false;
+	}
 	
 	/** Parses a string in the format of a MySQL DATETIME and turns it into a DateTime.
 	 * @param stringDate - The date of a MySQL type DATETIME in string format.

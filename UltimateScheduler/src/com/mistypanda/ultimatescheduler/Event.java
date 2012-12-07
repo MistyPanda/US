@@ -22,19 +22,8 @@ public class Event implements Serializable{
 	int Version;
 	MediaAlbum mediaAlbum;
 	
-	
 	/**
-	 * Constructor for the event class. takes strings for the event name, location, host and information. 
-	 * it also requires a start and end date for the event 
 	 * 
-	 * @param iD
-	 * @param eventName
-	 * @param location
-	 * @param host
-	 * @param startDate
-	 * @param endDate
-	 * @param info
-	 * @param version
 	 */
 	public Event(int iD, String eventName, String location, String host, DateTime startDate,
 			DateTime endDate, String info, int version) {

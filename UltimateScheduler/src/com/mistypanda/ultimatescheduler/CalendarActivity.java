@@ -1,4 +1,4 @@
-package com.mistypanda.ultimatescheduler.activity;
+package com.mistypanda.ultimatescheduler;
 
 import android.app.Activity;
 import android.os.Bundle;

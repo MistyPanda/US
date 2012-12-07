@@ -1,4 +1,4 @@
-package com.mistypanda.ultimatescheduler.activity;
+package com.mistypanda.ultimatescheduler;
 
 import java.util.ArrayList;
 
@@ -6,12 +6,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import com.mistypanda.ultimatescheduler.Event;
-import com.mistypanda.ultimatescheduler.EventListAdapter;
-import com.mistypanda.ultimatescheduler.R;
 import com.mistypanda.ultimatescheduler.DBAccess.*;
-import com.mistypanda.ultimatescheduler.R.id;
-import com.mistypanda.ultimatescheduler.R.layout;
 
 import android.app.Activity;
 import android.app.ListActivity;

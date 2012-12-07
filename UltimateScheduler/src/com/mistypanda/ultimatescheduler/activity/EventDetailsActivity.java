@@ -1,4 +1,9 @@
-package com.mistypanda.ultimatescheduler;
+package com.mistypanda.ultimatescheduler.activity;
+
+import com.mistypanda.ultimatescheduler.Event;
+import com.mistypanda.ultimatescheduler.R;
+import com.mistypanda.ultimatescheduler.R.id;
+import com.mistypanda.ultimatescheduler.R.layout;
 
 import android.app.Activity;
 import android.content.Intent;

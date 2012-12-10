@@ -141,6 +141,32 @@ public class CreateEventActivity extends Activity {
 		String descrip = description.getText().toString();
 		String password = "";//TO-DO
 		
+		
+		//check strings;
+		if(eLoc.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eHost.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eStart.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eEnd.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(descrip.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
 		try {
 			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip, password);
 		} catch (InterruptedException e) {

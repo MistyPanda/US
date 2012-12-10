@@ -70,7 +70,7 @@ public class Event implements Serializable{
 		this.endDate = endDate;
 		this.Info = info;
 		this.Version = version;
-		//mediaAlbum = new MediaAlbum();
+		//mediaAlbum = new MediaAlbum(null, null);
 	}
 	
 	/**

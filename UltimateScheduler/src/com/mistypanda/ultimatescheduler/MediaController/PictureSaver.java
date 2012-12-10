@@ -56,7 +56,7 @@ public class PictureSaver extends Thread {
 
 	        try {
 	        	//InetAddress address = InetAddress.getByName("152.65.35.115");
-	            socket = new Socket("152.65.35.100", 1880);
+	            socket = new Socket("152.65.35.166", 1880);
 	            out = new DataOutputStream(socket.getOutputStream());
 	            in = new DataInputStream(
 	                                        socket.getInputStream());

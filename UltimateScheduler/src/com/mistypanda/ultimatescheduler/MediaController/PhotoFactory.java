@@ -48,7 +48,7 @@ public class PhotoFactory extends Thread {
 			 threads = new ArrayList<PhotoThread>();
 			for(int i=0;i<mediaAlbum.getNumPhotos();i++){
 				//create and initialize a thread for each picture
-				threads.add(new PhotoThread(photoContainer, "http://152.65.35.100/"+mediaAlbum.getPhoto(i), activity ) );
+				threads.add(new PhotoThread(photoContainer, "http://152.65.35.166/"+mediaAlbum.getPhoto(i), activity ) );
 				threads.get(i).start();
 			}
 			

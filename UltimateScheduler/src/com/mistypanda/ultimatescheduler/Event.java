@@ -1,6 +1,7 @@
 package com.mistypanda.ultimatescheduler;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.joda.time.DateTime;
 
@@ -12,18 +13,51 @@ import org.joda.time.DateTime;
  *
  */
 public class Event implements Serializable{
+	/**
+	 * this is the event's integer identification. it should be unique
+	 */
 	int ID;
+	/**
+	 * this is the event's name
+	 */
 	String EventName;
+	/**
+	 * this is the location where the event will take place
+	 */
 	String Location;
+	/**
+	 * this is the host of the event
+	 */
 	String Host;
 	DateTime startDate;
 	DateTime endDate;
+	/**
+	 * this contains information about the event
+	 */
 	String Info;
+	/**
+	 * this is the version number of the event. gets updated when things change
+	 */
 	int Version;
-	MediaAlbum mediaAlbum;
+	//MediaAlbum mediaAlbum;
+	/**
+	 * this is the password associated with the event to allow editing privileges
+	 */
+	String password;
+	
 	
 	/**
+	 * Constructor for the event class. takes strings for the event name, location, host and information. 
+	 * it also requires a start and end date for the event 
 	 * 
+	 * @param iD
+	 * @param eventName
+	 * @param location
+	 * @param host
+	 * @param startDate
+	 * @param endDate
+	 * @param info
+	 * @param version
 	 */
 	public Event(int iD, String eventName, String location, String host, DateTime startDate,
 			DateTime endDate, String info, int version) {
@@ -60,11 +94,15 @@ public class Event implements Serializable{
 		return EventName;
 	}
 
-	/**
+	/** 
+	 * 
 	 * @param eventName the eventName to set
+	 * @throws Exception 
 	 */
-	private void setEventName(String eventName) {
+	void setEventName(String eventName) throws Exception {
+		if(validateStrings(eventName))
 		EventName = eventName;
+		else throw new Exception("invalid input!");
 	}
 
 	/**
@@ -76,9 +114,12 @@ public class Event implements Serializable{
 
 	/**
 	 * @param location the location to set
+	 * @throws Exception 
 	 */
-	private void setLocation(String location) {
-		Location = location;
+	void setLocation(String location) throws Exception {
+		if(validateStrings(location))
+			Location = location;
+			else throw new Exception("invalid input!");
 	}
 
 	/**
@@ -90,11 +131,55 @@ public class Event implements Serializable{
 
 	/**
 	 * @param info the info to set
+	 * @throws Exception 
 	 */
-	private void setInfo(String info) {
-		Info = info;
+	void setInfo(String info) throws Exception {
+		if(validateStrings(info))
+			Info = info;
+			else throw new Exception("invalid input!");
 	}
 
+	/**
+	 * @return the host
+	 */
+	public String getHost() {
+		return Host;
+	}
+
+	/**
+	 * @param host the host to set
+	 * @throws Exception 
+	 */
+	void setHost(String host) throws Exception {
+		if(validateStrings(host))
+		Host = host;
+		else throw new Exception("invalid input!");
+		
+	}
+	
+	public int getVersion(){
+		return Version;
+	}
+	
+	public void incrementVersion(){
+		Version++;
+	}
+
+	/**
+	 * this method will ensure that a string exists for the input 
+	 * boolean
+	 * @param input
+	 * @return
+	 */
+	private boolean validateStrings(String input){
+		String trimmedString = input.trim();
+		if(trimmedString.equals("")){
+			return false;
+		}
+		return true;
+	}
+
+	
 	/**
 	 * @return the startDate
 	 */
@@ -123,28 +208,8 @@ public class Event implements Serializable{
 		this.endDate = endDate;
 	}
 
-	/**
-	 * @return the host
-	 */
-	public String getHost() {
-		return Host;
-	}
 
-	/**
-	 * @param host the host to set
-	 */
-	private void setHost(String host) {
-		Host = host;
-	}
 	
-	public int getVersion(){
-		return Version;
-	}
-	
-	public void setVersion(int version){
-		Version = version;
-	}
-
 	public boolean getPhoto(){	return false;	}
 	public boolean getVideo(){	return false;	}
 	public boolean publishEvent(){return false;	}

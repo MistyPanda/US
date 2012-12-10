@@ -39,6 +39,32 @@ public class CreateEventActivity extends Activity {
 		String eEnd	= endDate.getText().toString();
 		String descrip = info.getText().toString();
 		
+		
+		//check strings;
+		if(eLoc.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eHost.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eStart.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(eEnd.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
+		
+		if(descrip.replace(" ", "").isEmpty()){
+			//call method to allert user;
+			
+		}
 		try {
 			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip);
 		} catch (InterruptedException e) {

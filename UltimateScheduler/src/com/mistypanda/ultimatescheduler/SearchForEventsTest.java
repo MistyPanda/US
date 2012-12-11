@@ -19,15 +19,16 @@ public class SearchForEventsTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		events = new ArrayList<Event>();
-		events.add(new Event(1, "cool event number 1", "my house", "kevin", null, null, "this will be a cool party thing", 0));
-		events.add(new Event(2, "interesting event number 2", "my house", "kevin", null, null, "this will be an interesting party thing", 0));
-		events.add(new Event(3, "bitchin party number 3", "the bac", "jec", null, null, "this will be a bitchin party thing", 0));
-		events.add(new Event(4, "cool event number 4", "pengle", "jec", null, null, "this will be a pretty cool party thing", 0));
-		events.add(new Event(5, "interesting event number 5", "the bac", "senai", null, null, "this may be a pretty interesting thing", 0));
-		events.add(new Event(6, "bitchin party number 6", "pengle", "senai", null, null, "this is a bitchin party", 0));
-		events.add(new Event(7, "something gathering number 7", "my house", "kevin", null, null, "who knows what will happen", 0));
-		events.add(new Event(8, "nobody likes number 8", "the abyss", "panda", null, null, "you can't say no!", 0));
-		
+		try{
+		events.add(new Event(1, "cool event number 1", "my house", "kevin", null, null, "this will be a cool party thing", 0,"pass"));
+		events.add(new Event(2, "interesting event number 2", "my house", "kevin", null, null, "this will be an interesting party thing", 0,"pass"));
+		events.add(new Event(3, "bitchin party number 3", "the bac", "jec", null, null, "this will be a bitchin party thing", 0,"pass"));
+		events.add(new Event(4, "cool event number 4", "pengle", "jec", null, null, "this will be a pretty cool party thing", 0,"pass"));
+		events.add(new Event(5, "interesting event number 5", "the bac", "senai", null, null, "this may be a pretty interesting thing", 0,"pass"));
+		events.add(new Event(6, "bitchin party number 6", "pengle", "senai", null, null, "this is a bitchin party", 0,"pass"));
+		events.add(new Event(7, "something gathering number 7", "my house", "kevin", null, null, "who knows what will happen", 0,"pass"));
+		events.add(new Event(8, "nobody likes number 8", "the abyss", "panda", null, null, "you can't say no!", 0,"pass"));
+		}catch(Exception e){}
 		super.setUp();
 	}
 

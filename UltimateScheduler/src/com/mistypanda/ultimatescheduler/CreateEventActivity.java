@@ -141,7 +141,6 @@ public class CreateEventActivity extends Activity {
 		String descrip = description.getText().toString();
 		String password = "";//TO-DO
 		
-		
 		try {
 			// creating the event will validate the input for the event to add
 			Event candidate = new Event(0,eNam, eLoc, eHost, null, null, descrip,0, password);

@@ -13,7 +13,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R;
+import android.content.res.Resources;
 import android.net.ParseException;
+import android.util.Log;
+
 import com.mistypanda.ultimatescheduler.Event;
 
 
@@ -39,7 +43,9 @@ public class DBHelper {
 		FetchTask task = new FetchTask();
 		
 		// FIGURE OUT HOW TO ACCESS STRING RESOURCE
-		//task.execute(R.string.get_event);
+		//task.execute(R.string.hello_world);
+		//getString(R.string.hello_world);
+		//Resources.getSystem().getString(R.string.get_event);
 		
 		// Start background thread to access the database through php
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEvent.php?id="+eventID);
@@ -62,8 +68,9 @@ public class DBHelper {
 				DateTime endDate = parseDate(json_data.getString("eEndDate"));
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
+				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, startDate, endDate, info, version);
+				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
 			}
 		}
 		catch(JSONException je){
@@ -71,6 +78,9 @@ public class DBHelper {
 		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return event;
@@ -108,8 +118,9 @@ public class DBHelper {
 				DateTime endDate = parseDate(json_data.getString("eEndDate"));
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
+				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, startDate, endDate, info, version);
+				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
 				eventList.add(event);
 			}
 		}
@@ -118,6 +129,9 @@ public class DBHelper {
 		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		// Return the list of all events in the external database.
@@ -144,8 +158,6 @@ public class DBHelper {
 		// Start background thread to access the database through php
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
 				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
-		
-		
 	}
 
 	/**
@@ -156,10 +168,9 @@ public class DBHelper {
 	 * @throws ExecutionException
 	 * @throws TimeoutException
 	 */
-	public static Boolean deleteEvent(int eID, String password) throws InterruptedException, ExecutionException, TimeoutException{
+	public static void deleteEvent(int eID, String password) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deleteEvent.php?id="+eID+"&pass="+password);
-		return false;
 	}
 	
 	/**
@@ -171,17 +182,110 @@ public class DBHelper {
 	 * @param eDat
 	 * @param info
 	 * @param password
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static void updateEvent(int eID, String eNam, String loc, String host, String sDat,
+			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
+				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+	}
+	
+	
+	/**
+	 * @param eID
+	 * @param filePath
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static void addPhoto(int eID, String filePath) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/addPhoto.php?id="+eID+"&path="+filePath);
+	}
+	
+	/**
+	 * @param eID
 	 * @return
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 * @throws TimeoutException
 	 */
-	public static Boolean updateEvent(int eID, String eNam, String loc, String host, String sDat,
-			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
+	public static List<String> getAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
-				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
-		return false;
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
+		String result = task.getData();
+		
+		List<String>  photoPath = new ArrayList<String>();
+		try {
+			JSONArray dataArray = new JSONArray(result);
+			JSONObject json_data = null;
+			
+			for(int i=0; i<dataArray.length(); i++){
+				json_data = dataArray.getJSONObject(i);
+				Log.d("TAG", json_data.getString("filepath"));
+				photoPath.add(json_data.getString("filepath"));
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return photoPath;
+	}
+	
+	/**
+	 * @param eID
+	 * @param filepath
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static void deletePhoto(int eID, String filepath) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID+"&path="+filepath);
+	}
+	
+	/**
+	 * @param eID
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 * @throws TimeoutException
+	 */
+	public static void deleteAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID);
+	}
+	
+	/**
+	 * @return
+	 */
+	public static List<String> getEventVersions(){
+		FetchTask task = new FetchTask();
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getVersions.php");
+		String result = task.getData();
+		List<String> versions = new ArrayList<String>();
+		
+		// Parse results into manageable variables and events. Then add them to event list.
+		try{
+			JSONArray dataArray = new JSONArray(result);
+			JSONObject json_data = null;
+			
+			for(int i=0; i<dataArray.length(); i++){
+				json_data = dataArray.getJSONObject(i);
+				String idVersion = json_data.getInt("eID")+","+json_data.getInt("filepath");
+				versions.add(idVersion);
+			}
+		}
+		catch(JSONException je){
+			System.out.println(je.toString());
+		}
+		catch(ParseException pe){
+			System.out.println("Date string is not in the correct format: " + pe.toString());
+		}
+		
+		return versions;
 	}
 	
 	/** Parses a string in the format of a MySQL DATETIME and turns it into a DateTime.
@@ -194,4 +298,5 @@ public class DBHelper {
 		return date;
 	}
 
+	
 }

@@ -71,7 +71,8 @@ public class PictureSaver extends Thread {
 	        }
 	        //convert picture to byte array
 	        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            bitmap.compress(Bitmap.CompressFormat.PNG, MAX_PRIORITY, stream);
+            
             byte[] byteArray = stream.toByteArray();
             
            // send byte array to socket;

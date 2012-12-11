@@ -75,7 +75,7 @@
             android:text="Details"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
     <Button
         android:id="@+id/addPictures"

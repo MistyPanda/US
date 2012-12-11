@@ -16,7 +16,7 @@ public class EventTest extends TestCase {
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	protected void setUp() throws Exception {
-		event = new Event(0, "name", "location", "host", null, null, "information", 0);
+		event = new Event(0, "name", "location", "host", null, null, "information", 0, "password");
 		super.setUp();
 	}
 
@@ -107,6 +107,38 @@ public class EventTest extends TestCase {
 		try{
 			event.setInfo("newInfo");
 			assertTrue("Info should equal the new value", event.getInfo().equals("newInfo"));
+		}catch(Exception e){
+			fail("shouldnt get here");
+		}
+	}
+	public void testPassword(){
+		try{
+			event.setPassword("");
+			fail("accepted an empty string! This is not good!");
+		}catch(Exception e){
+			assertTrue("password should still equal old value", event.getPassword().equals("password"));
+			assertTrue("Error message should inform of empty string",
+					e.getMessage().equals("Password invalid input! password cannot be an empty string"));
+		}
+		try{
+			event.setInfo("   ");
+			fail("accepted an empty string! This is not good!");
+		}catch(Exception e){
+			assertTrue("password should still equal old value", event.getPassword().equals("password"));
+			assertTrue("Error message should inform of empty string",
+					e.getMessage().equals("Password invalid input! password cannot be an empty string"));
+		}
+		try{
+			event.setInfo("thispasswordisover9000characterslong");
+			fail("accepted a long string! This is not good!");
+		}catch(Exception e){
+			assertTrue("password should still equal old value", event.getPassword().equals("password"));
+			assertTrue("Error message should inform of long string",
+					e.getMessage().equals("Password invalid input! password must be less than 26 characters"));
+		}
+		try{
+			event.setInfo("newpass");
+			assertTrue("password should equal the new value", event.getPassword().equals("newpass"));
 		}catch(Exception e){
 			fail("shouldnt get here");
 		}

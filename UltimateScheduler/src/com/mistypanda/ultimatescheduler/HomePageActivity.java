@@ -1,4 +1,4 @@
-package com.mistypanda.ultimatescheduler.activity;
+package com.mistypanda.ultimatescheduler;
 
 
 
@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Toast;
 
@@ -38,14 +39,13 @@ public class HomePageActivity extends Activity {
 		setContentView(R.layout.homepage);
 
 		try {
-			Log.d("Local Database", "Checking to see if local database has been created.");
 			String destPath = "/data/data/" + getPackageName() +
 			"/databases/LittlePanda.db";
 			File f = new File(destPath);
 			if (!f.exists()) {
 				CopyDB( getBaseContext().getAssets().open("LittlePanda.db"),
 						new FileOutputStream(destPath));
-				addAllEvents();
+				//addAllEvents();
 			}
 		} catch (FileNotFoundException e) {
 			Log.w(local, "Local Database not found; Attempting to create new local database.");
@@ -54,26 +54,39 @@ public class HomePageActivity extends Activity {
 			e.printStackTrace();
 		}
 		
+		LocalDBAdapter db = new LocalDBAdapter(this);
+
+		/**
 		String eNam = "Final+Tests";
 		String loc = "Placid+103";
 		String host = "MistyPanda";
 		String sDat = "2012-12-13+20:30:00";
-		String eDat = "2021-12-13+24:00:00";
+		String eDat = "2012-12-13+23:00:00";
 		String info = "Final+testing+and+submittions.";
 		String password = "testpassword";
-		int eID = 33;
+		int eID = 35;
 		String filePath = "testphoto123";
 		Event testEvent = null;
 		try {
 			Log.d("Database tests", "Attempting database methods.");
-			DBHelper.addEvent(eNam, loc, host, sDat, eDat, info, password);
+			//testEvent = DBHelper.getEventByEventID(3);
+			//Log.d("Database tests", "Event ID: "+ testEvent.getID()+" Name: "+testEvent.getEventName());
+			//db.open();
+			//LocalDBAdapter.insertEvent(testEvent);
+			//displayRecord(LocalDBAdapter.getEvent(3));
+			//db.close();
+			//DBHelper.addEvent(eNam, loc, host, sDat, eDat, info, password);
+			
 			DBHelper.addPhoto(eID, filePath);
-			testEvent = DBHelper.getEventByEventID(eID);
+			List<String>photos = DBHelper.getAllPhotos(eID);
+			Log.d("Database tests", "Photo: "+photos.get(0));
+			
 			Toast.makeText(this, 
 					"Event ID: "+testEvent.getID()+"\n"+
 					"Name: "+testEvent.getEventName()+"\n"+
 					"Version: "+testEvent.getVersion(), 
 					Toast.LENGTH_LONG).show();
+					
 			
 			
 		} catch (InterruptedException e) {
@@ -86,8 +99,14 @@ public class HomePageActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		**/
+	    super.onCreate(savedInstanceState);
+	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy); 
+	    setContentView(R.layout.homepage);
+	
+	    // TODO Auto-generated method stub
 	}
 
 	public void eventsClick(View view){
@@ -107,7 +126,7 @@ public class HomePageActivity extends Activity {
 		outputStream.close();
 	}
 
-	public void DisplayRecord(Cursor c){
+	public void displayRecord(Cursor c){
 		Toast.makeText(this,
 				"Event ID: " + c.getString(0) + "\n" +
 				"Name: " + c.getString(1) + "\n" ,

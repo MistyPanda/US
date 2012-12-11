@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import android.R;
 import android.content.res.Resources;
 import android.net.ParseException;
+import android.util.Log;
+
 import com.mistypanda.ultimatescheduler.Event;
 
 
@@ -76,6 +78,9 @@ public class DBHelper {
 		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return event;
@@ -124,6 +129,9 @@ public class DBHelper {
 		}
 		catch(ParseException pe){
 			System.out.println("Date string is not in the correct format: " + pe.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		// Return the list of all events in the external database.
@@ -207,8 +215,9 @@ public class DBHelper {
 	 */
 	public static List<String> getAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getPhotos.php?id="+eID);
+		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
 		String result = task.getData();
+		
 		List<String>  photoPath = new ArrayList<String>();
 		try {
 			JSONArray dataArray = new JSONArray(result);
@@ -216,6 +225,7 @@ public class DBHelper {
 			
 			for(int i=0; i<dataArray.length(); i++){
 				json_data = dataArray.getJSONObject(i);
+				Log.d("TAG", json_data.getString("filepath"));
 				photoPath.add(json_data.getString("filepath"));
 			}
 		} catch (JSONException e) {

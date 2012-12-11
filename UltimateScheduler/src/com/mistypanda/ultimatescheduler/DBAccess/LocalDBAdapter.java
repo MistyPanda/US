@@ -124,7 +124,7 @@ public class LocalDBAdapter {
 		return(db.delete(TABLE_NAME, KEY_ID + " = " + eventID, null) > 0);
 	}
 	
-	public Cursor getEvent(long eventID){		
+	public static Cursor getEvent(long eventID){		
 		Cursor cursor =
 			db.query(true, TABLE_NAME, new String[] {KEY_ID, eventName,
 					eventLocation, eventHost, eventStartDate, eventEndDate, eventInfo, eventVersion},
@@ -135,7 +135,7 @@ public class LocalDBAdapter {
 			return cursor;
 	}
 	
-	public Cursor getAllEvents(){
+	public static Cursor getAllEvents(){
 		return db.query(TABLE_NAME, new String[] {KEY_ID, eventName,
 				eventLocation, eventHost, eventStartDate, eventEndDate, eventInfo, eventVersion}, null, null, null, null,null);
 	}

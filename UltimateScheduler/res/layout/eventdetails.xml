@@ -1,69 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/eventdetailswrapper"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateEventActivity" >
+    android:background="#98AFC7" >
 
-    <TextView
-        android:id="@+id/eventNameDetails"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="5dp"
-        android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="vertical"
+        tools:context=".CreateEventActivity" 
+        android:background="#98AFC7">
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/eventNameDetails"
-        android:layout_marginTop="5dp"
-        android:text="Location"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    <TextView
-        android:id="@+id/Host"
+        <TextView
+            android:id="@+id/eventNameDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:text="Name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <!-- android:layout_below="@+id/textView1" -->
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/eventNameDetails"
+            android:layout_marginTop="5dp"
+            android:text="Location"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/Host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/location"
+            android:layout_marginTop="5dp"
+            android:text="Host"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/StartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/Host"
+            android:layout_marginTop="5dp"
+            android:text="Start Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/EndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/StartDate"
+            android:layout_marginTop="5dp"
+            android:text="End Date"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/Info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/EndDate"
+            android:layout_marginTop="5dp"
+            android:text="Details"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+
+    <Button
+        android:id="@+id/addPictures"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:onClick="onAddPictureClick"
+        android:text="Add Pictures" />
+
+    <Button
+        android:id="@+id/editEvent"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Edit Event" />
+
+    <Button
+        android:id="@+id/saveToCal"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Save Event to Calendar" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/location" 
-        android:layout_marginTop="5dp"
-        android:text="Host"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:orientation="vertical"
+        android:background="#98AFC7" >
 
-    <TextView
-        android:id="@+id/StartDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Host"
-        android:layout_marginTop="5dp"
-        android:text="Start Date"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <LinearLayout
+            android:id="@+id/images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:background="#98AFC7">
 
-    <TextView
-        android:id="@+id/EndDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/StartDate" 
-        android:layout_marginTop="5dp"
-        android:text="End Date"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/Info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/EndDate"
-        android:layout_marginTop="5dp"
-        android:text="Details"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

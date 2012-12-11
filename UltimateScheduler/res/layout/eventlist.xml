@@ -9,11 +9,16 @@
 
     <Button
         android:id="@+id/createEventButton"
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:onClick="addEventClick"
         android:text="Create Event" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Search" />
 
     <ListView
         android:id="@+id/eventListView"

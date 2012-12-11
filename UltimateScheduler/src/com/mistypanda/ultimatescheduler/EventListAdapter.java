@@ -1,5 +1,6 @@
 package com.mistypanda.ultimatescheduler;
 
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -30,7 +31,7 @@ public class EventListAdapter extends ArrayAdapter<Event> {
 		
 		eventName.setText(events.get(position).getEventName());
 		location.setText(events.get(position).getLocation());
-		date.setText(events.get(position).getStartDate().toString());
+		date.setText(events.get(position).getStartDate().toDate().toString());
 		
 
 		

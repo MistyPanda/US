@@ -153,15 +153,15 @@ public class CreateEventActivity extends Activity {
 			
 		}
 		
-		if(eStart.replace(" ", "").isEmpty()){
+		//if(eStart.replace(" ", "").isEmpty()){
 			//call method to allert user;
 			
-		}
+		//}
 		
-		if(eEnd.replace(" ", "").isEmpty()){
+		//if(eEnd.replace(" ", "").isEmpty()){
 			//call method to allert user;
 			
-		}
+		//}
 		
 		if(descrip.replace(" ", "").isEmpty()){
 			//call method to allert user;

@@ -43,7 +43,7 @@ public class LocalDBAdapter {
 
 	private final Context context;
 	private LocalDBHelper DBHelper;
-	private SQLiteDatabase db;
+	private static SQLiteDatabase db;
 
 	public LocalDBAdapter(Context ctx){
 		this.context = ctx;
@@ -86,7 +86,7 @@ public class LocalDBAdapter {
 		DBHelper.close();
 	}
 	
-	public long insertEvent(Event event) throws SQLException{
+	public static long insertEvent(Event event) throws SQLException{
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID, event.getID());
 		values.put(eventName, event.getEventName());
@@ -100,7 +100,7 @@ public class LocalDBAdapter {
 		return db.insert(TABLE_NAME, null, values);
 	}
 	
-	public long insertAllEvents(List<Event> eventList) throws SQLException{
+	public static long insertAllEvents(List<Event> eventList) throws SQLException{
 		ContentValues values = new ContentValues();
 		Event tempEvent = null;
 		long count = 0;
@@ -138,6 +138,10 @@ public class LocalDBAdapter {
 	public Cursor getAllEvents(){
 		return db.query(TABLE_NAME, new String[] {KEY_ID, eventName,
 				eventLocation, eventHost, eventStartDate, eventEndDate, eventInfo, eventVersion}, null, null, null, null,null);
+	}
+	
+	public static Cursor getVersions(){
+		return db.query(TABLE_NAME, new String[] {KEY_ID, eventVersion}, null, null, null, null,null);
 	}
 
 	//Return the count of events in the local SQLite database

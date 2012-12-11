@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/eventdetailswrapper"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#98AFC7" >
 
     <RelativeLayout
         android:id="@+id/RelativeLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".CreateEventActivity" >
+        tools:context=".CreateEventActivity" 
+        android:background="#98AFC7">
 
         <TextView
             android:id="@+id/eventNameDetails"
@@ -73,37 +75,38 @@
             android:text="Details"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/button1"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentRight="true"
-            android:onClick="onAddPictureClick"
-            android:text="Add Pictures" />
+        </RelativeLayout>
 
-        <Button
-            android:id="@+id/saveEventButton"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:onClick="onSaveEventClick"
-            android:text="Add Pictures" />
+    <Button
+        android:id="@+id/addPictures"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:onClick="onAddPictureClick"
+        android:text="Add Pictures" />
 
-    </RelativeLayout>
+    <Button
+        android:id="@+id/editEvent"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Edit Event" />
+
+    <Button
+        android:id="@+id/saveToCal"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Save Event to Calendar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:background="#98AFC7" >
 
         <LinearLayout
             android:id="@+id/images"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:background="#98AFC7">
 
         </LinearLayout>
 

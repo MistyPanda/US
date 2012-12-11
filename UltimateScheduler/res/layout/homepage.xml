@@ -13,7 +13,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:gravity="right"
-        android:text="#MistyPanda" />
+        android:text="#MistyPanda"
+        android:clickable="true" />
 
     <Button
         android:id="@+id/eventList"
@@ -33,14 +34,7 @@
         android:layout_below="@+id/eventList"
         android:text="My Calendar" />
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/myCalendar"
-        android:layout_below="@+id/myCalendar"
-        android:layout_marginTop="56dp"
-        android:text="Search" />
+    
 
     <TextView
         android:id="@+id/appName"
@@ -50,7 +44,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
         android:gravity="center"
-        android:text="Efortless Events"
+        android:text="Effortless Events"
         android:textColor="@color/black"
         android:textSize="25sp" />
 

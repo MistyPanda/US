@@ -3,6 +3,11 @@ package com.mistypanda.ultimatescheduler;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
+import com.mistypanda.ultimatescheduler.DBAccess.DBHelper;
 
 /**
  * This class holds all media items for a given event.
@@ -17,8 +22,8 @@ public class MediaAlbum implements Serializable{
 	
 	}
 	
-	public MediaAlbum(ArrayList<String> media){
-		this.media=media;
+	public MediaAlbum(List<String> media){
+		this.media= new ArrayList<String>(media);
 	
 	}
 	
@@ -36,8 +41,22 @@ public class MediaAlbum implements Serializable{
 		
 	}
 	
-	public void addPic(String string){
+	public void addPic(int eId, String string){
 		media.add(string);
+		try {
+			DBHelper.addPhoto(eId, string);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	
 	}
 	

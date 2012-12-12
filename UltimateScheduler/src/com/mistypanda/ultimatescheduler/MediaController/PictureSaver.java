@@ -38,13 +38,14 @@ public class PictureSaver extends Thread {
 		ArrayList<PhotoThread> threads;
 		   Socket socket = null;
 	        DataOutputStream out = null;
-	        DataInputStream in = null;
-	
+	        BufferedReader in = null;
+	        int eId;
 		
-		public PictureSaver(Bitmap bitmap, MediaAlbum mediaAlbum){
+		public PictureSaver(Bitmap bitmap, MediaAlbum mediaAlbum,  int eId){
 			this.bitmap = bitmap;
 			this.mediaAlbum=mediaAlbum;
 			this.activity = activity;
+			this.eId = eId;
 		
 		}
 		
@@ -55,11 +56,12 @@ public class PictureSaver extends Thread {
 	     
 
 	        try {
+	        	
+	        
 	        	//InetAddress address = InetAddress.getByName("152.65.35.115");
-	            socket = new Socket("152.65.35.166", 1880);
+	            socket = new Socket("152.65.35.128", 1880);
 	            out = new DataOutputStream(socket.getOutputStream());
-	            in = new DataInputStream(
-	                                        socket.getInputStream());
+	            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	        } catch (UnknownHostException e) {
 	        	 e.printStackTrace();
 	           Log.d("blah ", "Don't know about host: taranis.");
@@ -82,6 +84,7 @@ public class PictureSaver extends Thread {
 	        
 	        	
 	        	out.flush();
+	        	
 	        	
 	        	waitOnResponse();
 	        	out.close();
@@ -107,17 +110,19 @@ public class PictureSaver extends Thread {
 		
 		void waitOnResponse(){
 			String newFile= "";
-			while(newFile.equals("")==true){
-				
+			while(newFile=="" || newFile==null){
+				System.out.println("about to try reading from socket");
 				try{
-					newFile = in.readUTF();
+					System.out.println("Reading now");
+					newFile = in.readLine();
 				}
 				catch(Exception e){
-				
+					System.out.println(e.getMessage());
 				}
 			
 		}
-			 mediaAlbum.addPic(newFile);
+			System.out.println("Finsihed reading. New file is : " + newFile);
+			 mediaAlbum.addPic(eId, newFile);
 		}
 		
 		

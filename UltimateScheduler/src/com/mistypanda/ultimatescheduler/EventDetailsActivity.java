@@ -3,6 +3,7 @@ package com.mistypanda.ultimatescheduler;
 import java.util.Calendar;
 
 import com.mistypanda.ultimatescheduler.DBAccess.DBHelper;
+import com.mistypanda.ultimatescheduler.DBAccess.LocalDBAdapter;
 import com.mistypanda.ultimatescheduler.MediaController.PhotoFactory;
 import com.mistypanda.ultimatescheduler.MediaController.PictureSaver;
 
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -95,9 +97,10 @@ public class EventDetailsActivity extends Activity {
 		//AlertDialog alert = new AlertDialog(getContext());
 		
 		
-		//final Intent intent = new Intent(this, EditEventActivity.java);
+		final Intent intent = new Intent(this, EditEventActivity.class);
 		final Activity passedActivity = this;
 		final EditText passwordView = new EditText(this);
+		passwordView.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
@@ -115,10 +118,10 @@ public class EventDetailsActivity extends Activity {
 						// if this button is clicked, close
 						// current activity
 						String password = passwordView.getText().toString();
-						if(password==event.getPassword()){
+						if(password.equals(event.getPassword())){
 							//
-							//intent.putExtra("Event", event);
-							//startActivity(intent);
+							intent.putExtra("Event", event);
+							startActivity(intent);
 							Toast.makeText(passedActivity, "Right Password", Toast.LENGTH_SHORT).show();
 						}
 						else{
@@ -145,6 +148,22 @@ public class EventDetailsActivity extends Activity {
 		
 		//add notification to ask user about adding events
 		//AlertDialog alert = new AlertDialog(getContext());
+		System.out.println("Here1");
+	
+		LocalDBAdapter db = new LocalDBAdapter(this);
+		try{
+			db.open();
+			System.out.println("Here2");
+			LocalDBAdapter.insertEvent(event);
+			System.out.println("Here3");
+			db.close();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		System.out.println("Here4");
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
  
@@ -161,10 +180,10 @@ public class EventDetailsActivity extends Activity {
 						// current activity
 						
 						Calendar beginTime = Calendar.getInstance();
-						beginTime.setTime(event.getStartDate().toDate());
+						beginTime.setTime(DBHelper.parseDate(event.getStartDate()).toDate());
 
 						Calendar endTime = Calendar.getInstance();
-						endTime.setTime(event.getEndDate().toDate());
+						endTime.setTime(DBHelper.parseDate(event.getEndDate()).toDate());
 						Intent intent = new Intent(Intent.ACTION_INSERT)
 						        .setData(Events.CONTENT_URI)
 						        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())

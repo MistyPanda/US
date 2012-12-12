@@ -64,8 +64,8 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String startDate = json_data.getString("eStartDate");
+				String endDate = json_data.getString("eEndDate");
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
@@ -114,8 +114,8 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String startDate = json_data.getString("eStartDate");
+				String endDate = json_data.getString("eEndDate");
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
@@ -297,7 +297,7 @@ public class DBHelper {
 	 * @param stringDate - The date of a MySQL type DATETIME in string format.
 	 * @return The date in the form of DateTime.
 	 */
-	private static DateTime parseDate(String stringDate) {
+	public static DateTime parseDate(String stringDate) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 		DateTime date = format.parseDateTime(stringDate);
 		return date;

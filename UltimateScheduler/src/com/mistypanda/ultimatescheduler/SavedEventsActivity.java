@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
-import com.mistypanda.ultimatescheduler.DBAccess.*;
+import com.mistypanda.ultimatescheduler.DBAccess.LocalDBAdapter;
+
+
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.Cursor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,17 +27,38 @@ public class SavedEventsActivity extends Activity// extends ListActivity
 {
 	
 	List<Event> events= new ArrayList<Event>(); 
+	Cursor eventsCursor;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-		setContentView(R.layout.eventlist);
-	    LayoutInflater inflater = getLayoutInflater();
-	    ListView listView = (ListView)findViewById(R.id.eventListView);
+		setContentView(R.layout.savedevents);
+	    //LayoutInflater inflater = getLayoutInflater();
+	    ListView listView = (ListView)findViewById(R.id.savedEventListView);
 	   
-	    
+	    LocalDBAdapter db = new LocalDBAdapter(this);
 	    try{
-	 	   // events = get all saved events from device
+	 	  
+	    	db.open();
+	    	
+	    	eventsCursor = LocalDBAdapter.getAllEvents();
+	    }  catch(Exception e){
+ 	    	
+ 	    	System.out.println(e.getMessage());	
+ 	    }
+	    try{
+	    	
+	    	
+	    	
+	    	events = cursorMethod(eventsCursor);
+	    }  catch(Exception e){
+ 	    	
+ 	    	System.out.println(e.getMessage());	
+ 	    }
+	    	
+	 
+	    try{
+	    	db.close();
 	 	    }	   
 
 	 	    catch(Exception e){
@@ -67,4 +91,25 @@ public class SavedEventsActivity extends Activity// extends ListActivity
  
 	}
 	
+	public ArrayList<Event> cursorMethod(Cursor cursor) throws Exception{
+		Event hold = null;
+		ArrayList<Event> list = new ArrayList<Event>();
+		if(cursor.moveToFirst()){
+			do{
+				hold = new Event(cursor.getInt(0), //ID
+						cursor.getString(1), //Name
+						cursor.getString(2), //Location
+						cursor.getString(3), //Host
+						cursor.getString(4), //Start
+						cursor.getString(5), //End
+						cursor.getString(6), //Info
+						cursor.getInt(7), 	//Version
+						"testpassword"); //password
+				list.add(hold);
+				
+			}while(cursor.moveToNext());
+		}
+		
+		return list;
+	}
 }

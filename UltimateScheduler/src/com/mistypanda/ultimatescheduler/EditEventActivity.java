@@ -56,7 +56,8 @@ public class EditEventActivity extends Activity{
 	static final int TIME_DIALOG = 2;
 	static final int TIME_DIALOG2 = 3;
 	
-	
+	EditText name, host, location, description, pword;
+	TextView startDate, endDate, startTime, endTime;
 	
  
 	/*
@@ -66,7 +67,26 @@ public class EditEventActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 	
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.createactivity);
+	    setContentView(R.layout.editeventactivity);
+		Intent intent = getIntent();
+		event=(Event)intent.getSerializableExtra("Event");
+		
+		 name = (EditText)findViewById(R.id.editeventNameET);
+		 host = (EditText)findViewById(R.id.editeventHostET);
+		location = (EditText)findViewById(R.id.editlocationET);
+		 description = (EditText)findViewById(R.id.editdescriptionET);
+		 pword = (EditText)findViewById(R.id.editenterPassword);
+		
+		startDate = (TextView)findViewById(R.id.showStartDate);
+		endDate = (TextView)findViewById(R.id.showEndDate);
+		startTime = (TextView)findViewById(R.id.showStartTime);
+	    endTime = (TextView)findViewById(R.id.showEndTime);
+	    
+	    name.setText(event.getEventName());
+	    host.setText(event.getHost());
+	    location.setText(event.getLocation());
+	    description.setText(event.getInfo());
+	    pword.setText(event.getPassword());
 	    
 	    /*
 	     *  Set secondTime listener and set them to the appropriate buttons and textviews
@@ -258,17 +278,7 @@ public class EditEventActivity extends Activity{
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 		
 		LayoutInflater inflater = getLayoutInflater();
-		
-		EditText name = (EditText)findViewById(R.id.eventNameET);
-		EditText host = (EditText)findViewById(R.id.eventHostET);
-		EditText location = (EditText)findViewById(R.id.locationET);
-		EditText description = (EditText)findViewById(R.id.descriptionET);
-		EditText pword = (EditText)findViewById(R.id.enterPassword);
-		
-		TextView startDate = (TextView)findViewById(R.id.showStartDate);
-		TextView endDate = (TextView)findViewById(R.id.showEndDate);
-		TextView startTime = (TextView)findViewById(R.id.showStartTime);
-		TextView endTime = (TextView)findViewById(R.id.showEndTime);
+	
 	
 		String eNam = processSpaces(name.getText().toString());
 		String eLoc = processSpaces(location.getText().toString());

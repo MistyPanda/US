@@ -64,13 +64,15 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String start = json_data.getString("eStartDate");
+				String end = json_data.getString("eEndDate");
+				//DateTime startDate = parseDate(json_data.getString("eStartDate"));
+				//DateTime endDate = parseDate(json_data.getString("eEndDate"));
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
+				event = new Event(eID, eventName, location, host, start, end, info, version, pass);
 			}
 		}
 		catch(JSONException je){
@@ -114,13 +116,15 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String start = json_data.getString("eStartDate");
+				String end = json_data.getString("eEndDate");
+				//DateTime startDate = parseDate(json_data.getString("eStartDate"));
+				//DateTime endDate = parseDate(json_data.getString("eEndDate"));
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
+				event = new Event(eID, eventName, location, host, start, end, info, version, pass);
 				eventList.add(event);
 			}
 		}
@@ -264,12 +268,10 @@ public class DBHelper {
 	 * @throws InterruptedException 
 	 */
 	public static List<String> getEventVersions() throws InterruptedException, ExecutionException, TimeoutException{
-		Log.d("Tag", "Attempting to get versions....");
 		FetchTask task = new FetchTask();
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEventVersions.php");
 		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
-		Log.d("Tag", result);
 		List<String> versions = new ArrayList<String>();
 		
 		// Parse results into manageable variables and events. Then add them to event list.
@@ -297,7 +299,7 @@ public class DBHelper {
 	 * @param stringDate - The date of a MySQL type DATETIME in string format.
 	 * @return The date in the form of DateTime.
 	 */
-	private static DateTime parseDate(String stringDate) {
+	public static DateTime parseDate(String stringDate) {
 		DateTimeFormatter format = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 		DateTime date = format.parseDateTime(stringDate);
 		return date;

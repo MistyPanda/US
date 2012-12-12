@@ -1,7 +1,5 @@
 package com.mistypanda.ultimatescheduler;
 
-
-
 import java.io.File;
 
 import java.io.FileNotFoundException;
@@ -17,6 +15,7 @@ import java.util.concurrent.TimeoutException;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.StrictMode;
@@ -38,6 +37,7 @@ public class HomePageActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
 
+		//Local Database check
 		try {
 			String destPath = "/data/data/" + getPackageName() +
 			"/databases/LittlePanda.db";
@@ -45,7 +45,6 @@ public class HomePageActivity extends Activity {
 			if (!f.exists()) {
 				CopyDB( getBaseContext().getAssets().open("LittlePanda.db"),
 						new FileOutputStream(destPath));
-				//addAllEvents();
 			}
 		} catch (FileNotFoundException e) {
 			Log.w(local, "Local Database not found; Attempting to create new local database.");
@@ -56,6 +55,29 @@ public class HomePageActivity extends Activity {
 		LocalDBAdapter db = new LocalDBAdapter(this);
 		db.open();
 		db.close();
+		
+		try {
+			Event e1 = DBHelper.getEvent(2);
+			Event e2 = DBHelper.getEvent(3);
+			db.open();
+			LocalDBAdapter.insertEvent(e1);
+			LocalDBAdapter.insertEvent(e2);
+			displayRecord(LocalDBAdapter.getEvent(e1.getID()));
+			displayRecord(LocalDBAdapter.getEvent(e2.getID()));
+			db.close();
+		} catch(SQLException se){
+			se.getStackTrace();
+		}
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	    super.onCreate(savedInstanceState);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -90,29 +112,6 @@ public class HomePageActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 	}
 	
-	/**
-	public void addAllEvents(){
-		try {
-			List<Event> allEvents = DBHelper.getAllEvents();
-			Long count = LocalDBAdapter.insertAllEvents(allEvents);
-			if(count > 0){
-				Log.d("Local DB", "Local db updated; "+count+" Events added."	);
-			}
-			else{
-				Log.d("Local DB", "No events added to local db.");
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	/*
 	
 	/**
 	public void update(){

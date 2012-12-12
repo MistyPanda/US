@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
+import com.mistypanda.ultimatescheduler.DBAccess.LocalDBAdapter;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -34,16 +35,13 @@ public class EventsActivity extends Activity// extends ListActivity
 	    LayoutInflater inflater = getLayoutInflater();
 	    //LinearLayout layout = (LinearLayout)inflater.inflate(R.layout.eventlist,null);
 	    ListView listView = (ListView)findViewById(R.id.eventListView);
-	   
+	  
+	    LocalDBAdapter db = new LocalDBAdapter(this);
+	    
 	    try{
 	 	   events = DBHelper.getAllEvents();
 	 	    	//events.add(DBHelper.getEventByEventID(1));
 	 	    }	   
-
-
-
-
-
 	 	    catch(Exception e){
 	 	    	System.out.println(e.getMessage());	
 	 	    }

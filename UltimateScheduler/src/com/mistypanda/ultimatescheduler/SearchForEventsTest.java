@@ -28,6 +28,7 @@ public class SearchForEventsTest extends TestCase {
 		events.add(new Event(6, "bitchin party number 6", "pengle", "senai", null, null, "this is a bitchin party", 0,"pass"));
 		events.add(new Event(7, "something gathering number 7", "my house", "kevin", null, null, "who knows what will happen", 0,"pass"));
 		events.add(new Event(8, "nobody likes number 8", "the abyss", "panda", null, null, "you can't say no!", 0,"pass"));
+		events.add(new Event(9, "I cant Believe i forgot", "Big lake", "John Smith", null, null, "ALL CAPS", 0, "password"));
 		}catch(Exception e){}
 		super.setUp();
 	}
@@ -163,6 +164,30 @@ public class SearchForEventsTest extends TestCase {
 		assertTrue("should be empty!",results.size()==0);
 		
 
+
+	}
+	public void testCaseProblems() {
+		/**
+events.add(new Event(8, "nobody likes number 8", "the abyss", "panda", null, null, "you can't say no!", 0,"pass"));
+events.add(new Event(9, "I cant Believe i forgot", "Big lake", "John Smith", null, null, "ALL CAPS", 0, "password"));	
+		 */
+		
+		// make sure all the searches can ignore capitals
+		ArrayList<Event> results = SearchForEvents.searchEvents(events,"Y");	
+		assertTrue("search for events should find regardless of case",results.size()>0);
+		
+		results = SearchForEvents.searchByName(events,"i cant believe i forgot");
+		assertTrue("search for events by name should find regardless of case",results.size()>0);
+
+		results = SearchForEvents.searchByLocation(events,"big lake");
+		assertTrue("search for events by location should find regardless of case",results.size()>0);
+
+		results = SearchForEvents.searchByHost(events,"john smith");
+		assertTrue("search for events by host should find regardless of case",results.size()>0);
+
+		results = SearchForEvents.searchByInfo(events,"all caps");
+		assertTrue("search for events by info should find regardless of case",results.size()>0);
+		
 
 	}
 

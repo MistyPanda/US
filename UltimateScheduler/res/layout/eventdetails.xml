@@ -24,7 +24,7 @@
             android:layout_gravity="right"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginRight="7dp"
+            android:layout_marginRight="14dp"
             android:text="Name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="35dp" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="14dp"
             android:text="Location"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dp" />
@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="14dp"
             android:text="Host"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dp" />
@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="14dp"
             android:text="Start Date"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dp" />
@@ -66,7 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="14dp"
             android:text="End Date"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dp" />
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="14dp"
             android:text="Details"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dp" />

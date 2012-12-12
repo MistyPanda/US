@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -95,9 +96,10 @@ public class EventDetailsActivity extends Activity {
 		//AlertDialog alert = new AlertDialog(getContext());
 		
 		
-		//final Intent intent = new Intent(this, EditEventActivity.java);
+		final Intent intent = new Intent(this, EditEventActivity.class);
 		final Activity passedActivity = this;
 		final EditText passwordView = new EditText(this);
+		passwordView.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
@@ -115,10 +117,10 @@ public class EventDetailsActivity extends Activity {
 						// if this button is clicked, close
 						// current activity
 						String password = passwordView.getText().toString();
-						if(password==event.getPassword()){
+						if(password.equals(event.getPassword())){
 							//
-							//intent.putExtra("Event", event);
-							//startActivity(intent);
+							intent.putExtra("Event", event);
+							startActivity(intent);
 							Toast.makeText(passedActivity, "Right Password", Toast.LENGTH_SHORT).show();
 						}
 						else{

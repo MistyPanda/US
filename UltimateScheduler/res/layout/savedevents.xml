@@ -16,7 +16,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
-        android:id="@+id/eventListView"
+        android:id="@+id/savedEventListView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         tools:context=".CreateEventActivity"

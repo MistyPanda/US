@@ -24,7 +24,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/eventNameET"
+        android:id="@+id/editeventNameET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -35,7 +35,7 @@
         />
 
     <EditText
-        android:id="@+id/locationET"
+        android:id="@+id/editlocationET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
@@ -45,7 +45,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/eventHostET"
+        android:id="@+id/editeventHostET"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
@@ -55,7 +55,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/enterPassword"
+        android:id="@+id/editenterPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dip"
@@ -67,7 +67,7 @@
     </EditText>
 
     <EditText
-        android:id="@+id/descriptionET"
+        android:id="@+id/editdescriptionET"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="5dip"

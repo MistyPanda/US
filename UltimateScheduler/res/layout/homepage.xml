@@ -25,13 +25,14 @@
         android:layout_marginTop="50dp"
         android:onClick="eventsClick"
         android:text="Events List" />
-
+
     <Button
         android:id="@+id/myCalendar"
         android:layout_width="215dp"
         android:layout_height="48dp"
         android:layout_alignLeft="@+id/eventList"
         android:layout_below="@+id/eventList"
+        android:onClick="savedEventsClick"
         android:text="My Saved Events" />
 
     <TextView

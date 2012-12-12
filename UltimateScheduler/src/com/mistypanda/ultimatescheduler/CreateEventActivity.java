@@ -7,6 +7,7 @@ import java.util.concurrent.TimeoutException;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,17 +17,26 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
 public class CreateEventActivity extends Activity {
 
-	private int mYear, secYear;
-	private int mMonth, secMonth;
-	private int mDay, secDay;
-
+	private int mYear;
+	private int secYear;
+	private int mMonth;
+	private int secMonth;
+	private int mDay;
+	private int secDay;
+	private int mHour;
+	private int mMinute;
+	private int sMinute;
+	private int sHour;
+	
 	private TextView mDateDisplay;
 	private Button mPickDate;
+	
 	private TextView secondDateDisplay;
 	private Button secondPickDate;
 	
@@ -35,8 +45,10 @@ public class CreateEventActivity extends Activity {
 	private TextView secondTimeDisplay;
 	private Button secondPickTime;
 
-	static final int DATE_DIALOG_ID = 0;
-	static final int DATE_DIALOG_ID2 = 0;
+	static final int DATE_DIALOG_START = 0;
+	static final int DATE_DIALOG_ID2 = 1;
+	static final int TIME_DIALOG = 2;
+	static final int TIME_DIALOG2 = 3;
 	
 	
 	
@@ -47,45 +59,78 @@ public class CreateEventActivity extends Activity {
 	
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.createactivity);
-	 
+	    
+	    secondTimeDisplay = (TextView) findViewById(R.id.showEndTime);        
+	    secondPickTime = (Button) findViewById(R.id.endTime);
+	    
+	    secondPickTime.setOnClickListener(new View.OnClickListener() {
+			@SuppressWarnings("deprecation")
+			public void onClick(View v) {
+	            showDialog(TIME_DIALOG2);
+	        }
+	    });
+	    
+	    updateDisplayTime2();
+	    
+	    firstTimeDisplay = (TextView) findViewById(R.id.showStartTime);        
+	    firstPickTime = (Button) findViewById(R.id.startTime);
+	    
+	    firstPickTime.setOnClickListener(new View.OnClickListener() {
+			@SuppressWarnings("deprecation")
+			public void onClick(View v) {
+	            showDialog(TIME_DIALOG);
+	        }
+	    });
+	    
+	    updateDisplayTime();
+	    
 	    mDateDisplay = (TextView) findViewById(R.id.showStartDate);        
 	    mPickDate = (Button) findViewById(R.id.myStartDateButton);
 		
-		
-	    secondDateDisplay = (TextView) findViewById(R.id.showEndDate);        
-	    secondPickDate = (Button) findViewById(R.id.myEndDateButton);
-	    
-
 	    mPickDate.setOnClickListener(new View.OnClickListener() {
-	        public void onClick(View v) {
-	            showDialog(DATE_DIALOG_ID);
+			@SuppressWarnings("deprecation")
+			public void onClick(View v) {
+	            showDialog(DATE_DIALOG_START);
 	        }
 	    });
 	    
-	    secondPickDate.setOnClickListener(new View.OnClickListener() {
-	        public void onClick(View v) {
-	            showDialog(DATE_DIALOG_ID2);
-	        }
-	    });
-
 	    // get the current date
 	    final Calendar c = Calendar.getInstance();
 	    mYear = c.get(Calendar.YEAR);
 	    mMonth = c.get(Calendar.MONTH);
 	    mDay = c.get(Calendar.DAY_OF_MONTH);
-	    	    
+	    
 	    updateDisplay();
+	    
+	    
+	    /*
+	     * Second Date Picker OnClickListener, and getting the current date to display as the text view initially.
+	     */
+	    secondDateDisplay = (TextView) findViewById(R.id.showEndDate);        
+	    secondPickDate = (Button) findViewById(R.id.myEndDateButton);
+	    
+	    secondPickDate.setOnClickListener(new View.OnClickListener() {
+	        @SuppressWarnings("deprecation")
+			public void onClick(View c) {
+	            showDialog(DATE_DIALOG_ID2);
+	        }
+	    });
+
+	    // get the current date
+	    final Calendar c2 = Calendar.getInstance();
+	    secYear = c2.get(Calendar.YEAR);
+	    secMonth = c2.get(Calendar.MONTH);
+	    secDay = c2.get(Calendar.DAY_OF_MONTH);
+
+	    
+	    updateDisplaySec();
+	   
+	    
   
 	}
 	
     // display the current date
     private void updateDisplay() {
-    	this.secondDateDisplay.setText(new StringBuilder()
-        	// Month is 0 based so add 1
-        	.append(secMonth + 1).append("-")
-        	.append(secDay).append("-")
-        	.append(secYear).append(" "));
-    	
         this.mDateDisplay.setText(
             new StringBuilder()
                     // Month is 0 based so add 1
@@ -94,6 +139,25 @@ public class CreateEventActivity extends Activity {
                     .append(mYear).append(" "));
     }
     
+    private void updateDisplaySec() {
+    	this.secondDateDisplay.setText(new StringBuilder()
+        	// Month is 0 based so add 1
+        	.append(secMonth + 1).append("-")
+        	.append(secDay).append("-")
+        	.append(secYear).append(" "));
+    }
+    
+    private void updateDisplayTime() {
+    	this.firstTimeDisplay.setText(new StringBuilder()
+    		.append(mHour).append(":").append(mMinute)
+    		);
+    }
+    
+    private void updateDisplayTime2() {
+    	this.secondTimeDisplay.setText(new StringBuilder()
+    		.append(sHour).append(":").append(sMinute)
+    		);
+    }
     
 	
     private DatePickerDialog.OnDateSetListener mDateSetListener =
@@ -103,26 +167,60 @@ public class CreateEventActivity extends Activity {
     	            mYear = year;
     	            mMonth = monthOfYear;
     	            mDay = dayOfMonth;
-    	            secYear = year;
-    	            secMonth = monthOfYear;
-    	            secDay = dayOfMonth;
     	            updateDisplay();
     	        }
     	    };
     	    
+	private DatePickerDialog.OnDateSetListener secDateSetListener =
+		    new DatePickerDialog.OnDateSetListener() {
+		        public void onDateSet(DatePicker viewSec, int yearSec, 
+		                              int monthOfYearSec, int dayOfMonthSec) {
+		    
+		            secYear = yearSec;
+		            secMonth = monthOfYearSec;
+		            secDay = dayOfMonthSec;
+		            updateDisplaySec();
+		        }
+		    };
+		    
+    private TimePickerDialog.OnTimeSetListener mTimeListener =
+    	    new TimePickerDialog.OnTimeSetListener() {
+    	        public void onTimeSet(TimePicker view, int hour, int minute) {
+    	            mHour = hour;
+    	            mMinute = minute;
+    	            updateDisplayTime();
+    	        }
+    	    };
+    	    
+    	    
+    private TimePickerDialog.OnTimeSetListener sTimeListener =
+    	    new TimePickerDialog.OnTimeSetListener() {
+    	        public void onTimeSet(TimePicker view, int hour, int minute) {
+    	            sHour = hour;
+    	            sMinute = minute;
+    	            updateDisplayTime2();
+    	        }
+    	    };
     	   
     @Override
     protected Dialog onCreateDialog(int id) {
        switch (id) {
-       case DATE_DIALOG_ID:
+       case DATE_DIALOG_START:
           return new DatePickerDialog(this,
                     mDateSetListener,
                     mYear, mMonth, mDay);
+       		case DATE_DIALOG_ID2:
+       			return new DatePickerDialog(this, secDateSetListener,
+       					secYear, secMonth, secDay);
+       		case TIME_DIALOG:
+       			return new TimePickerDialog(this, mTimeListener, mHour, mMinute, true);
+       		case TIME_DIALOG2:
+       			return new TimePickerDialog(this, sTimeListener, sHour, sMinute, true);
        }
        return null;
     }  
-	
-
+    
+ 
 	
 	public void createClick(View view){
 		LayoutInflater inflater = getLayoutInflater();

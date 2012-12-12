@@ -38,7 +38,7 @@ public class DBHelper {
 	 * @throws ExecutionException
 	 * @throws TimeoutException
 	 */
-	public static Event getEventByEventID(int eventID) throws InterruptedException, ExecutionException, TimeoutException{
+	public static Event getEvent(int eventID) throws InterruptedException, ExecutionException, TimeoutException{
 		Event event = null;
 		FetchTask task = new FetchTask();
 		
@@ -49,7 +49,7 @@ public class DBHelper {
 		
 		// Start background thread to access the database through php
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEvent.php?id="+eventID);
-		task.get(2000, TimeUnit.MILLISECONDS);
+		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
 		// Parse result into manageable variables and create new event
@@ -99,7 +99,7 @@ public class DBHelper {
 		
 		// Start background thread to access the database through php
 		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllEvents.php");
-		task.get(3000, TimeUnit.MILLISECONDS);
+		task.get(30000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
 		// Parse results into manageable variables and events. Then add them to event list.
@@ -137,7 +137,6 @@ public class DBHelper {
 		// Return the list of all events in the external database.
 		return eventList;
 	}
-	
 	
 	/**
 	 * @param eNam
@@ -188,11 +187,11 @@ public class DBHelper {
 	 */
 	public static void updateEvent(int eID, String eNam, String loc, String host, String sDat,
 			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
+		
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
 				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
 	}
-	
 	
 	/**
 	 * @param eID
@@ -203,7 +202,7 @@ public class DBHelper {
 	 */
 	public static void addPhoto(int eID, String filePath) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/addPhoto.php?id="+eID+"&path="+filePath);
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addPhoto.php?id="+eID+"&path="+filePath);
 	}
 	
 	/**
@@ -215,7 +214,8 @@ public class DBHelper {
 	 */
 	public static List<String> getAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
+		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
 		List<String>  photoPath = new ArrayList<String>();
@@ -225,7 +225,6 @@ public class DBHelper {
 			
 			for(int i=0; i<dataArray.length(); i++){
 				json_data = dataArray.getJSONObject(i);
-				Log.d("TAG", json_data.getString("filepath"));
 				photoPath.add(json_data.getString("filepath"));
 			}
 		} catch (JSONException e) {
@@ -244,7 +243,7 @@ public class DBHelper {
 	 */
 	public static void deletePhoto(int eID, String filepath) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID+"&path="+filepath);
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID+"&path="+filepath);
 	}
 	
 	/**
@@ -255,16 +254,22 @@ public class DBHelper {
 	 */
 	public static void deleteAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID);
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID);
 	}
 	
 	/**
 	 * @return
+	 * @throws TimeoutException 
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
-	public static List<String> getEventVersions(){
+	public static List<String> getEventVersions() throws InterruptedException, ExecutionException, TimeoutException{
+		Log.d("Tag", "Attempting to get versions....");
 		FetchTask task = new FetchTask();
-		task.equals("http://www.users.csbsju.edu/~symesfin/mistypanda/getVersions.php");
+		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEventVersions.php");
+		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
+		Log.d("Tag", result);
 		List<String> versions = new ArrayList<String>();
 		
 		// Parse results into manageable variables and events. Then add them to event list.
@@ -274,7 +279,7 @@ public class DBHelper {
 			
 			for(int i=0; i<dataArray.length(); i++){
 				json_data = dataArray.getJSONObject(i);
-				String idVersion = json_data.getInt("eID")+","+json_data.getInt("filepath");
+				String idVersion = json_data.getInt("eID")+","+json_data.getInt("eVersion");
 				versions.add(idVersion);
 			}
 		}

@@ -49,57 +49,14 @@ public class HomePageActivity extends Activity {
 			}
 		} catch (FileNotFoundException e) {
 			Log.w(local, "Local Database not found; Attempting to create new local database.");
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		LocalDBAdapter db = new LocalDBAdapter(this);
+		db.open();
+		db.close();
 
-		/**
-		String eNam = "Final+Tests";
-		String loc = "Placid+103";
-		String host = "MistyPanda";
-		String sDat = "2012-12-13+20:30:00";
-		String eDat = "2012-12-13+23:00:00";
-		String info = "Final+testing+and+submittions.";
-		String password = "testpassword";
-		int eID = 35;
-		String filePath = "testphoto123";
-		Event testEvent = null;
-		try {
-			Log.d("Database tests", "Attempting database methods.");
-			//testEvent = DBHelper.getEventByEventID(3);
-			//Log.d("Database tests", "Event ID: "+ testEvent.getID()+" Name: "+testEvent.getEventName());
-			//db.open();
-			//LocalDBAdapter.insertEvent(testEvent);
-			//displayRecord(LocalDBAdapter.getEvent(3));
-			//db.close();
-			//DBHelper.addEvent(eNam, loc, host, sDat, eDat, info, password);
-			
-			DBHelper.addPhoto(eID, filePath);
-			List<String>photos = DBHelper.getAllPhotos(eID);
-			Log.d("Database tests", "Photo: "+photos.get(0));
-			
-			Toast.makeText(this, 
-					"Event ID: "+testEvent.getID()+"\n"+
-					"Name: "+testEvent.getEventName()+"\n"+
-					"Version: "+testEvent.getVersion(), 
-					Toast.LENGTH_LONG).show();
-					
-			
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		**/
 	    super.onCreate(savedInstanceState);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
@@ -133,6 +90,7 @@ public class HomePageActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 	}
 	
+	/**
 	public void addAllEvents(){
 		try {
 			List<Event> allEvents = DBHelper.getAllEvents();
@@ -154,6 +112,7 @@ public class HomePageActivity extends Activity {
 			e.printStackTrace();
 		}	
 	}
+	/*
 	
 	/**
 	public void update(){

@@ -73,6 +73,11 @@ public class CreateEventActivity extends Activity {
 	    mYear = c.get(Calendar.YEAR);
 	    mMonth = c.get(Calendar.MONTH);
 	    mDay = c.get(Calendar.DAY_OF_MONTH);
+	    
+	    final Calendar c2 = Calendar.getInstance();
+	    secYear = c2.get(Calendar.YEAR);
+	    secMonth = c2.get(Calendar.MONTH);
+	    secDay = c2.get(Calendar.DAY_OF_MONTH);
 	    	    
 	    updateDisplay();
   
@@ -80,11 +85,7 @@ public class CreateEventActivity extends Activity {
 	
     // display the current date
     private void updateDisplay() {
-    	this.secondDateDisplay.setText(new StringBuilder()
-        	// Month is 0 based so add 1
-        	.append(secMonth + 1).append("-")
-        	.append(secDay).append("-")
-        	.append(secYear).append(" "));
+
     	
         this.mDateDisplay.setText(
             new StringBuilder()
@@ -94,6 +95,15 @@ public class CreateEventActivity extends Activity {
                     .append(mYear).append(" "));
     }
     
+    private void updateDisplaySec() {
+    	this.secondDateDisplay.setText(new StringBuilder()
+        	// Month is 0 based so add 1
+        	.append(secMonth + 1).append("-")
+        	.append(secDay).append("-")
+        	.append(secYear).append(" "));
+    	
+
+    }
     
 	
     private DatePickerDialog.OnDateSetListener mDateSetListener =
@@ -103,12 +113,21 @@ public class CreateEventActivity extends Activity {
     	            mYear = year;
     	            mMonth = monthOfYear;
     	            mDay = dayOfMonth;
-    	            secYear = year;
-    	            secMonth = monthOfYear;
-    	            secDay = dayOfMonth;
     	            updateDisplay();
     	        }
     	    };
+    	    
+	private DatePickerDialog.OnDateSetListener secDateSetListener =
+		    new DatePickerDialog.OnDateSetListener() {
+		        public void onDateSet(DatePicker view, int year, 
+		                              int monthOfYear, int dayOfMonth) {
+		    
+		            secYear = year;
+		            secMonth = monthOfYear;
+		            secDay = dayOfMonth;
+		            updateDisplaySec();
+		        }
+		    };
     	    
     	   
     @Override
@@ -121,6 +140,18 @@ public class CreateEventActivity extends Activity {
        }
        return null;
     }  
+    
+    protected Dialog onCreateDialogSec(int id) {
+       switch (id) {
+       case DATE_DIALOG_ID2:
+          return new DatePickerDialog(this,
+                    secDateSetListener,
+                    secYear, secMonth, secDay);
+       }
+       return null;
+    }  
+    
+    
 	
 
 	

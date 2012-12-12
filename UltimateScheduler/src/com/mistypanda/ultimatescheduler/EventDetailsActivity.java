@@ -2,6 +2,7 @@ package com.mistypanda.ultimatescheduler;
 
 import java.util.Calendar;
 
+import com.mistypanda.ultimatescheduler.DBAccess.DBHelper;
 import com.mistypanda.ultimatescheduler.MediaController.PhotoFactory;
 import com.mistypanda.ultimatescheduler.MediaController.PictureSaver;
 
@@ -16,9 +17,13 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import org.joda.time.DateTime;
 
 public class EventDetailsActivity extends Activity {
@@ -31,7 +36,7 @@ public class EventDetailsActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    //create media album and then call the threads to add pictures
-	    mediaAlbum = new MediaAlbum(new String[]{"testfile.png"});
+	   
 	    
 	    
 	    //you stopped here mofo.
@@ -41,7 +46,13 @@ public class EventDetailsActivity extends Activity {
 	    
 	    Intent intent = getIntent();
 	    event = (Event) intent.getSerializableExtra("Event");
-	   
+	    try{
+	    mediaAlbum = new MediaAlbum(DBHelper.getAllPhotos(event.getID()));
+	    }
+	    catch(Exception e){
+	    	System.out.println(e.getMessage());
+	    	
+	    }
 	   setContentView(R.layout.eventdetails);
 	   
 	   TextView name = (TextView) findViewById(R.id.eventNameDetails);
@@ -76,7 +87,58 @@ public class EventDetailsActivity extends Activity {
 			//View view = (View)findViewById(R.id.images);
 		
 	}
-	
+	public void onEditEventClick(View view){
+		
+		//make popup to prompt user for password
+		
+		//add notification to ask user about adding events
+		//AlertDialog alert = new AlertDialog(getContext());
+		
+		
+		//final Intent intent = new Intent(this, EditEventActivity.java);
+		final Activity passedActivity = this;
+		final EditText passwordView = new EditText(this);
+		
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+				this);
+ 
+			// set title
+			alertDialogBuilder.setTitle("");
+			
+			// set dialog message
+			alertDialogBuilder
+				.setMessage("Please enter password for this event")
+				.setView(passwordView)
+				.setCancelable(true)
+				.setPositiveButton("Accept",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						// if this button is clicked, close
+						// current activity
+						String password = passwordView.getText().toString();
+						if(password==event.getPassword()){
+							//
+							//intent.putExtra("Event", event);
+							//startActivity(intent);
+							Toast.makeText(passedActivity, "Right Password", Toast.LENGTH_SHORT).show();
+						}
+						else{
+							Toast.makeText(passedActivity, "Wrong Password", Toast.LENGTH_SHORT).show();
+						}
+						
+						
+						
+						
+					}
+				  })
+				;
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
+				
+	}
 	public void onSaveEventClick(View view){
 		//add event to database
 		
@@ -151,19 +213,21 @@ private void editEvent(){
 		Bitmap bitmap;
 		
 	    if (requestCode == CAMERA_PIC_REQUEST) {  
-	        // do somethinig  
+	       if(resultCode== RESULT_OK) {// do somethinig  
 			LinearLayout view = (LinearLayout)findViewById(R.id.images);
 			Bundle extras = data.getExtras();
 		    bitmap = (Bitmap) extras.get("data");
 		    
 		    //write to socket
-		    PictureSaver pictureSaver = new PictureSaver(bitmap, mediaAlbum);
+		    PictureSaver pictureSaver = new PictureSaver(bitmap, mediaAlbum, event.getID());
 		    pictureSaver.run();
 		    
 		    //then add to actual view;
-		    ImageView imageView = new ImageView(view.getContext().getApplicationContext());
+		    ImageView imageView = new ImageView(this);
+		    imageView.setLayoutParams(new TableRow.LayoutParams(500,500));
 			imageView.setImageBitmap(bitmap);
 			((LinearLayout) view).addView(imageView);
+	    }
 	    } 
 		
 	}  

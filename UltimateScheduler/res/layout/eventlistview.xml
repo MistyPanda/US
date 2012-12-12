@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:text="@+id/label"
         android:textColor="@color/black"
-        android:textSize="15dp" >
+        android:textSize="35dp" >
 
     </TextView>
-    
+
     <TextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
@@ -23,10 +23,8 @@
         android:layout_marginLeft="7dp"
         android:text="@+id/label"
         android:textColor="@color/black"
-        android:textSize="10dp" >
+        android:textSize="20dp" />
 
-    </TextView>
-    
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
         android:layout_marginLeft="7dp"
         android:text="@+id/label"
         android:textColor="@color/black"
-        android:textSize="10dp" >
+        android:textSize="20dp" />
 
-    </TextView>
 </LinearLayout>

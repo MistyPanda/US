@@ -14,6 +14,7 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 
 public class PhotoThread extends Thread {
 		private Bitmap picture;
@@ -62,8 +63,7 @@ public class PhotoThread extends Thread {
 
 			 
 			ImageView view = new ImageView(photoContainer.getContext().getApplicationContext());
-			//view.setScaleX(5);
-			//view.setScaleY(5);
+			view.setLayoutParams(new TableRow.LayoutParams(500,500));
 			view.setImageBitmap(picture);
 			((LinearLayout) photoContainer).addView(view);
 			     }

@@ -28,5 +28,7 @@
         <activity android:name=".CalendarActivity"></activity>
         <activity android:name=".EventDetailsActivity"></activity>
         <activity android:name=".SearchEventActivity"></activity>
+        <activity android:name=".EditEventActivity"></activity>
+        
     </application>
 </manifest>

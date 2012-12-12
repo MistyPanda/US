@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
@@ -156,7 +157,7 @@ public class CreateEventActivity extends Activity {
 			e.printStackTrace();
 		} catch (Exception e){
 			//create pop up box with error message e.getMessage();
-			popupMessage(e.getMessage());
+			popupMessage("Create event Error: "+e.getMessage());
 		}
 		
 		Intent intent = new Intent(this, EventsActivity.class);
@@ -167,12 +168,13 @@ public class CreateEventActivity extends Activity {
 	}
 
 	/**
-	 * this method will take a string message and create a popup on the device displaying the message
+	 * this method will take a string message and create a popup on the device 
+	 *  displaying the message using the toast class
 	 * void
 	 * @param message
 	 */
 	private void popupMessage(String message) {
-		// TODO Auto-generated method stub
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		
 	}
 

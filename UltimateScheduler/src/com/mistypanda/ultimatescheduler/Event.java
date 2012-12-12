@@ -145,10 +145,9 @@ public class Event implements Serializable{
 	 * @param info the info to set
 	 * @throws Exception 
 	 */
-	void setInfo(String info) throws Exception {
+	void setInfo(String info) {
 		if(validateStrings(info))
 			Info = info;
-			else throw new Exception("Event Information invalid input! cannot be an empty string!");
 	}
 
 	/**
@@ -202,9 +201,6 @@ public class Event implements Serializable{
 		return Version;
 	}
 	
-	public void incrementVersion(){
-		Version++;
-	}
 
 	/**
 	 * this method will ensure that a string exists for the input 

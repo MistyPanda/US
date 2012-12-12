@@ -318,7 +318,7 @@ public class CreateEventActivity extends Activity {
 	 * @param message
 	 */
 	private void popupMessage(String message) {
-		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 		
 	}
 

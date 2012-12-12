@@ -161,10 +161,10 @@ public class EventDetailsActivity extends Activity {
 						// current activity
 						
 						Calendar beginTime = Calendar.getInstance();
-						beginTime.setTime(event.getStartDate().toDate());
+						beginTime.setTime(DBHelper.parseDate(event.getStartDate()).toDate());
 
 						Calendar endTime = Calendar.getInstance();
-						endTime.setTime(event.getEndDate().toDate());
+						endTime.setTime(DBHelper.parseDate(event.getEndDate()).toDate());
 						Intent intent = new Intent(Intent.ACTION_INSERT)
 						        .setData(Events.CONTENT_URI)
 						        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())

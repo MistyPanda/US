@@ -32,9 +32,7 @@
         android:layout_height="48dp"
         android:layout_alignLeft="@+id/eventList"
         android:layout_below="@+id/eventList"
-        android:text="My Calendar" />
-
-    
+        android:text="My Saved Events" />
 
     <TextView
         android:id="@+id/appName"
@@ -44,7 +42,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
         android:gravity="center"
-        android:text="Effortless Events"
+        android:text="The Eventbook"
         android:textColor="@color/black"
         android:textSize="25sp" />
 

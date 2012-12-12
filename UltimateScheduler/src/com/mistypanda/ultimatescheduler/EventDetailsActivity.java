@@ -3,6 +3,7 @@ package com.mistypanda.ultimatescheduler;
 import java.util.Calendar;
 
 import com.mistypanda.ultimatescheduler.DBAccess.DBHelper;
+import com.mistypanda.ultimatescheduler.DBAccess.LocalDBAdapter;
 import com.mistypanda.ultimatescheduler.MediaController.PhotoFactory;
 import com.mistypanda.ultimatescheduler.MediaController.PictureSaver;
 
@@ -147,6 +148,22 @@ public class EventDetailsActivity extends Activity {
 		
 		//add notification to ask user about adding events
 		//AlertDialog alert = new AlertDialog(getContext());
+		System.out.println("Here1");
+	
+		LocalDBAdapter db = new LocalDBAdapter(this);
+		try{
+			db.open();
+			System.out.println("Here2");
+			LocalDBAdapter.insertEvent(event);
+			System.out.println("Here3");
+			db.close();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		System.out.println("Here4");
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
  
@@ -163,10 +180,10 @@ public class EventDetailsActivity extends Activity {
 						// current activity
 						
 						Calendar beginTime = Calendar.getInstance();
-						beginTime.setTime(event.getStartDate().toDate());
+						beginTime.setTime(DBHelper.parseDate(event.getStartDate()).toDate());
 
 						Calendar endTime = Calendar.getInstance();
-						endTime.setTime(event.getEndDate().toDate());
+						endTime.setTime(DBHelper.parseDate(event.getEndDate()).toDate());
 						Intent intent = new Intent(Intent.ACTION_INSERT)
 						        .setData(Events.CONTENT_URI)
 						        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())

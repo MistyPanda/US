@@ -29,6 +29,7 @@
         <activity android:name=".EventDetailsActivity"></activity>
         <activity android:name=".SearchEventActivity"></activity>
         <activity android:name=".EditEventActivity"></activity>
+        <activity android:name=".SavedEventsActivity"></activity>
         
     </application>
 </manifest>

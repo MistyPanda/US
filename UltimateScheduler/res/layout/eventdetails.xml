@@ -100,6 +100,7 @@
         android:id="@+id/saveToCal"
         android:layout_width="match_parent"
         android:layout_height="34dp"
+        android:onClick="onSaveEventClick"
         android:text="Save Event to Calendar" />
 
     <HorizontalScrollView

@@ -172,33 +172,9 @@ public class CreateEventActivity extends Activity {
 		String descrip = description.getText().toString();
 		String password = "";//TO-DO
 		
-		
-		//check strings;
-		if(eLoc.replace(" ", "").isEmpty()){
-			//call method to allert user;
-			
-		}
-		
-		if(eHost.replace(" ", "").isEmpty()){
-			//call method to allert user;
-			
-		}
-		
-		if(eStart.replace(" ", "").isEmpty()){
-			//call method to allert user;
-			
-		}
-		
-		if(eEnd.replace(" ", "").isEmpty()){
-			//call method to allert user;
-			
-		}
-		
-		if(descrip.replace(" ", "").isEmpty()){
-			//call method to allert user;
-			
-		}
 		try {
+			// creating the event will validate the input for the event to add
+			Event candidate = new Event(0,eNam, eLoc, eHost, null, null, descrip,0, password);
 			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip, password);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -209,12 +185,25 @@ public class CreateEventActivity extends Activity {
 		} catch (TimeoutException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (Exception e){
+			//create pop up box with error message e.getMessage();
+			popupMessage(e.getMessage());
 		}
 		
 		Intent intent = new Intent(this, EventsActivity.class);
 		startActivity(intent);
 	//	View rowView=inflater.inflate(R.layout.eventlistview,parent, false);
 		
+		
+	}
+
+	/**
+	 * this method will take a string message and create a popup on the device displaying the message
+	 * void
+	 * @param message
+	 */
+	private void popupMessage(String message) {
+		// TODO Auto-generated method stub
 		
 	}
 

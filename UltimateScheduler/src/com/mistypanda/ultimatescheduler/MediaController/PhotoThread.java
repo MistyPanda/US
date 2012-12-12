@@ -62,6 +62,8 @@ public class PhotoThread extends Thread {
 
 			 
 			ImageView view = new ImageView(photoContainer.getContext().getApplicationContext());
+			//view.setScaleX(5);
+			//view.setScaleY(5);
 			view.setImageBitmap(picture);
 			((LinearLayout) photoContainer).addView(view);
 			     }

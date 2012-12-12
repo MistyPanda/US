@@ -14,5 +14,12 @@
     <string name="menu_choice2">My Calendar</string>
     <string name="menu_choice3">Learn More</string>
     <string name="copyright">#MistyPanda2012</string>
-
+	<string-array name="searchoptions">
+	    <item>Default(all)</item>
+	    <item>By Name</item>
+	    <item>By Location</item>
+	    <item>By Host</item>
+	    <item>By Details</item>
+	    
+	</string-array>
 </resources>

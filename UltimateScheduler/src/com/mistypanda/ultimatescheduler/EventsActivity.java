@@ -66,7 +66,13 @@ public class EventsActivity extends Activity// extends ListActivity
 	     
 	    
 	}
+	public void onSearchClick(View view){
+		Intent intent = new Intent(this, SearchEventActivity.class);
 	
+		intent.putExtra("EventList", new ArrayList<Event>(events));
+		
+		startActivity(intent);
+	}
 	//@Override
 	public void addEventClick(View view){
 		Intent intent = new Intent(this, CreateEventActivity.class);

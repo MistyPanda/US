@@ -5,6 +5,8 @@ import java.util.Date;
 
 import org.joda.time.DateTime;
 
+import android.util.Log;
+
 /**
  * Event class of the US will contain information about the events 
  * attributes include:id, name, location, time, daterange, info, contact, phonenumber
@@ -12,6 +14,7 @@ import org.joda.time.DateTime;
  * @author kahorton, Senai Mesfin
  *
  */
+@SuppressWarnings("serial")
 public class Event implements Serializable{
 	/**
 	 * this is the event's integer identification. it should be unique
@@ -29,8 +32,8 @@ public class Event implements Serializable{
 	 * this is the host of the event
 	 */
 	String Host;
-	DateTime startDate;
-	DateTime endDate;
+	String startDate;
+	String endDate;
 	/**
 	 * this contains information about the event
 	 */
@@ -49,7 +52,7 @@ public class Event implements Serializable{
 	/**
 	 * Constructor for the event class. takes strings for the event name, location, host and information. 
 	 * it also requires a start and end date for the event 
-	 * will throw an exception with a relevent error message for the first possible conflict 
+	 * will throw an exception with a relevant error message for the first possible conflict 
 	 * 
 	 * @param iD
 	 * @param eventName
@@ -61,8 +64,8 @@ public class Event implements Serializable{
 	 * @param version
 	 * @throws Exception 
 	 */
-	public Event(int iD, String eventName, String location, String host, DateTime startDate,
-			DateTime endDate, String info, int version, String password) throws Exception {
+	public Event(int iD, String eventName, String location, String host, String startDate,
+			String endDate, String info, int version, String password) throws Exception {
 		
 		this.ID = iD;
 		
@@ -159,14 +162,14 @@ public class Event implements Serializable{
 
 	/**
 	 * Tests for valid input and sets the event host
-	 * will throw an exception with a relevent error message for the first possible conflict
+	 * will throw an exception with a relevant error message for the first possible conflict
 	 * @param host the host to set
 	 * @throws Exception 
 	 */
 	void setHost(String host) throws Exception {
 		if(validateStrings(host))
 		Host = host;
-		else throw new Exception("Event Host invalid input! cannot be an empty string");
+		else throw new Exception("Event Host invalid input! Host cannot be an empty string.");
 		
 	}
 	/**
@@ -178,22 +181,34 @@ public class Event implements Serializable{
 		return password;
 	}
 	
+	void setPassword(String pass) throws Exception{
+		if(validateStrings(pass))
+			password = pass;
+		else throw new Exception("Event Password invalid input! Password cannot be an empty string.");
+	}
+	
 	/**
 	 * Tests for valid input and sets the event password for editing purposes
-	 * will throw an exception with a relevent error message for the first possible conflict
+	 * will throw an exception with a relevant error message for the first possible conflict
 	 * void
 	 * @param pass
 	 * @throws Exception 
 	 */
-	void setPassword(String pass) throws Exception {
+	public static String validatePassword(String pass) throws Exception {
 		if(!validateStrings(pass)){
-			throw new Exception("Password invalid input! password cannot be an empty string");
+			Log.d("Event Password", "Attempted Password: "+pass);
+			throw new Exception("Password invalid! Password cannot be an empty string");
+		}
+		else if(!(pass.length()>=5)){
+			Log.d("Event Password", "Attempted Password: "+pass);
+			throw new Exception("Password invalid! Password must be more then 6 characters.");
 		}
 		else if(!(pass.length()<=25)){
-			throw new Exception("Password invalid input! password must be less than 26 characters");	
+			Log.d("Event Password", "Attempted Password: "+pass);
+			throw new Exception("Password invalid! Password must be less than 26 characters.");	
 		}
 		else{// valid information
-			password = pass;
+			return pass;
 		}
 	}
 	
@@ -208,7 +223,7 @@ public class Event implements Serializable{
 	 * @param input
 	 * @return
 	 */
-	private boolean validateStrings(String input){
+	private static boolean validateStrings(String input){
 		String trimmedString = input.trim();
 		if(trimmedString.equals("")){
 			return false;
@@ -220,28 +235,28 @@ public class Event implements Serializable{
 	/**
 	 * @return the startDate
 	 */
-	public DateTime getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
 	/**
 	 * @param startDate the startDate to set
 	 */
-	private void setStartDate(DateTime startDate) {
+	void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
 	/**
 	 * @return the endDate
 	 */
-	public DateTime getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
 	/**
 	 * @param endDate the endDate to set
 	 */
-	private void setEndDate(DateTime endDate) {
+	void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

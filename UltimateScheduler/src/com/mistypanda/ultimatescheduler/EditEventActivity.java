@@ -1,11 +1,10 @@
 package com.mistypanda.ultimatescheduler;
 
+import android.app.Activity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
-
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -24,8 +23,10 @@ import android.widget.TimePicker;
 
 import com.mistypanda.ultimatescheduler.DBAccess.*;
 
-public class CreateEventActivity extends Activity {
+public class EditEventActivity extends Activity{
 
+	private Event event;
+	
 	private int mYear;
 	private int secYear;
 	private int mMonth;
@@ -286,9 +287,19 @@ public class CreateEventActivity extends Activity {
 		try {
 			// creating the event will validate the input for the event to add
 			Event candidate = new Event(0,eNam, eLoc, eHost, null, null, descrip,0, password);
-			Log.d("Create Event Acticity", "Name: "+eNam+", Loc: "+eLoc+", Host: "+eHost+
+			Log.d("Edit Event Acticity","ID: "+event.getID()+ ", Name: "+eNam+", Loc: "+eLoc+", Host: "+eHost+
 					", Info: "+descrip+", Start: "+startDateTime+", End: "+endDateTime+", Password: "+password);
-			DBHelper.addEvent(eNam, eLoc, eHost, startDateTime, endDateTime, descrip, password);
+			/**
+			 * @param eID
+			 * @param eNam
+			 * @param loc
+			 * @param host
+			 * @param sDat
+			 * @param eDat
+			 * @param info
+			 * @param password
+			 **/
+			DBHelper.updateEvent(event.getID(),eNam, eLoc, eHost, startDateTime, endDateTime, descrip, password);
 			//DBHelper.addEvent("Hello", "omg", "lol", "2015-5-15", "2016-5-23", "penis", "hellomyname+is+senai");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -301,7 +312,7 @@ public class CreateEventActivity extends Activity {
 			e.printStackTrace();
 		} catch (Exception e){
 			//create pop up box with error message e.getMessage();
-			popupMessage("Create event Error: "+e.getMessage());
+			popupMessage("Edit event Error: "+e.getMessage());
 		}
 		
 		Intent intent = new Intent(this, EventsActivity.class);

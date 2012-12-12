@@ -50,7 +50,7 @@ public class SearchForEvents {
 	public static ArrayList<Event> searchByName(ArrayList<Event> events, String target){
 		ArrayList<Event> hits = new ArrayList<Event>();
 		for(Event e: events){
-			if(e.getEventName().contains(target)){
+			if(e.getEventName().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
 			}
 		}
@@ -70,7 +70,7 @@ public class SearchForEvents {
 	public static ArrayList<Event> searchByLocation(ArrayList<Event> events, String target){
 		ArrayList<Event> hits = new ArrayList<Event>();
 		for(Event e: events){
-			if(e.getLocation().contains(target)){
+			if(e.getLocation().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
 			}
 		}
@@ -90,7 +90,7 @@ public class SearchForEvents {
 	public static ArrayList<Event> searchByHost(ArrayList<Event> events, String target){
 		ArrayList<Event> hits = new ArrayList<Event>();
 		for(Event e: events){
-			if(e.getHost().contains(target)){
+			if(e.getHost().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
 			}
 		}
@@ -111,7 +111,7 @@ public class SearchForEvents {
 	public static ArrayList<Event> searchByInfo(ArrayList<Event> events, String target){
 		ArrayList<Event> hits = new ArrayList<Event>();
 		for(Event e: events){
-			if(e.getInfo().contains(target)){
+			if(e.getInfo().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
 			}
 		}
@@ -132,13 +132,13 @@ public class SearchForEvents {
 	public static ArrayList<Event> searchEvents(ArrayList<Event> events, String target){
 		ArrayList<Event> hits = new ArrayList<Event>();
 		for(Event e: events){
-			if(e.getEventName().contains(target)){
+			if(e.getEventName().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
-			}else if(e.getLocation().contains(target)){
+			}else if(e.getLocation().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
-			}else if(e.getHost().contains(target)){
+			}else if(e.getHost().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
-			}else if(e.getInfo().contains(target)){
+			}else if(e.getInfo().toLowerCase().contains(target.toLowerCase())){
 				hits.add(e);
 			}
 		}

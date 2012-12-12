@@ -96,6 +96,7 @@ public class LocalDBAdapter {
 		Log.d(Tag, "Event version number: "+ event.getVersion());
 		return db.insert(TABLE_NAME, null, values);
 	}
+	
 	/**
 	public static long insertAllEvents(List<Event> eventList) throws SQLException{
 		ContentValues values = new ContentValues();

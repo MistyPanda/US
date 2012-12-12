@@ -1,5 +1,6 @@
 package com.mistypanda.ultimatescheduler;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -11,6 +12,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +36,8 @@ public class CreateEventActivity extends Activity {
 	private int mMinute;
 	private int sMinute;
 	private int sHour;
+	private int sSecond;
+	private int mSecond;
 	
 	private TextView mDateDisplay;
 	private Button mPickDate;
@@ -54,13 +58,18 @@ public class CreateEventActivity extends Activity {
 	
 	
  
-	/** Called when the activity is first created. */
+	/*
+	 *  Called when the activity is first created. 
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.createactivity);
 	    
+	    /*
+	     *  Set secondTime listener and set them to the appropriate buttons and textviews
+	     */
 	    secondTimeDisplay = (TextView) findViewById(R.id.showEndTime);        
 	    secondPickTime = (Button) findViewById(R.id.endTime);
 	    
@@ -71,8 +80,17 @@ public class CreateEventActivity extends Activity {
 	        }
 	    });
 	    
+	    final Calendar c0 = Calendar.getInstance();
+	    sHour = c0.get(Calendar.HOUR);
+	    sMinute = c0.get(Calendar.MINUTE);
+	    sSecond = c0.get(Calendar.SECOND);
+	    
 	    updateDisplayTime2();
 	    
+	    
+	    /*
+	     *  Set firstTime listener and set them to the appropriate buttons and textviews
+	     */
 	    firstTimeDisplay = (TextView) findViewById(R.id.showStartTime);        
 	    firstPickTime = (Button) findViewById(R.id.startTime);
 	    
@@ -83,8 +101,19 @@ public class CreateEventActivity extends Activity {
 	        }
 	    });
 	    
+
+	    
+	    final Calendar c1 = Calendar.getInstance();
+	    mHour = c1.get(Calendar.HOUR);
+	    mMinute = c1.get(Calendar.MINUTE);
+	    mSecond = c1.get(Calendar.SECOND);
+	    
+	    
 	    updateDisplayTime();
 	    
+	    /*
+	     *  Set startDate listener and set them to the appropriate buttons and textviews
+	     */
 	    mDateDisplay = (TextView) findViewById(R.id.showStartDate);        
 	    mPickDate = (Button) findViewById(R.id.myStartDateButton);
 		
@@ -135,28 +164,28 @@ public class CreateEventActivity extends Activity {
         this.mDateDisplay.setText(
             new StringBuilder()
                     // Month is 0 based so add 1
+                    .append(mYear).append("-")
                     .append(mMonth + 1).append("-")
-                    .append(mDay).append("-")
-                    .append(mYear).append(" "));
+                    .append(mDay).append(" "));
     }
     
     private void updateDisplaySec() {
     	this.secondDateDisplay.setText(new StringBuilder()
         	// Month is 0 based so add 1
+        	.append(secYear).append("-")
         	.append(secMonth + 1).append("-")
-        	.append(secDay).append("-")
-        	.append(secYear).append(" "));
+        	.append(secDay).append(" "));
     }
     
     private void updateDisplayTime() {
     	this.firstTimeDisplay.setText(new StringBuilder()
-    		.append(mHour).append(":").append(mMinute)
+    		.append(addZero(mHour)).append(":").append(addZero(mMinute)).append(":").append(mSecond)
     		);
     }
     
     private void updateDisplayTime2() {
     	this.secondTimeDisplay.setText(new StringBuilder()
-    		.append(sHour).append(":").append(sMinute)
+    		.append(addZero(sHour)).append(":").append(addZero(sMinute)).append(":").append(sSecond)
     		);
     }
     
@@ -224,26 +253,43 @@ public class CreateEventActivity extends Activity {
  
 	
 	public void createClick(View view){
+		
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		
 		LayoutInflater inflater = getLayoutInflater();
+		
 		EditText name = (EditText)findViewById(R.id.eventNameET);
-		//DatePicker startDate = (DatePicker)findViewById(R.id.startDateTV);
-		//DatePicker endDate = (DatePicker)findViewById(R.id.endDateTV);
 		EditText host = (EditText)findViewById(R.id.eventHostET);
 		EditText location = (EditText)findViewById(R.id.locationET);
 		EditText description = (EditText)findViewById(R.id.descriptionET);
+		EditText pword = (EditText)findViewById(R.id.enterPassword);
 		
-		String eNam = name.getText().toString();
-		String eLoc = location.getText().toString();
-		String eHost = host.getText().toString();
-		String eStart = null;	/*= startDate.getText().toString();*/
-		String eEnd = null;	/*= endDate.getText().toString();*/
-		String descrip = description.getText().toString();
-		String password = "";//TO-DO
+		TextView startDate = (TextView)findViewById(R.id.showStartDate);
+		TextView endDate = (TextView)findViewById(R.id.showEndDate);
+		TextView startTime = (TextView)findViewById(R.id.showStartTime);
+		TextView endTime = (TextView)findViewById(R.id.showEndTime);
+	
+		String eNam = processSpaces(name.getText().toString());
+		String eLoc = processSpaces(location.getText().toString());
+		String eHost = processSpaces(host.getText().toString());
+		String eStart = startDate.getText().toString();
+		String eEnd = endDate.getText().toString();
+		String descrip = processSpaces(isEmpty(description.getText().toString()));
+		String password = processSpaces(pword.getText().toString());
+		String sTime = startTime.getText().toString();
+		String eTime = endTime.getText().toString();
+		
+		String startDateTime = eStart + "+" + sTime;
+		String endDateTime = eEnd + "+" + eTime;
+
 		
 		try {
 			// creating the event will validate the input for the event to add
 			Event candidate = new Event(0,eNam, eLoc, eHost, null, null, descrip,0, password);
-			DBHelper.addEvent(eNam, eLoc, eHost, eStart, eEnd, descrip, password);
+			Log.d("Create Event Acticity", "Name: "+eNam+", Loc: "+eLoc+", Host: "+eHost+
+					", Info: "+descrip+", Start: "+startDateTime+", End: "+endDateTime+", Password: "+password);
+			DBHelper.addEvent(eNam, eLoc, eHost, startDateTime, endDateTime, descrip, password);
+			//DBHelper.addEvent("Hello", "omg", "lol", "2015-5-15", "2016-5-23", "penis", "hellomyname+is+senai");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -275,5 +321,46 @@ public class CreateEventActivity extends Activity {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 		
 	}
+
+    /**
+     *    This method will take in any string input and replace all ' ' characters with the sequence "+"
+     *    First it will locate the spaces in the string
+     *    then it will replace spaces with the representation of space in php language  
+     * String
+     * @param input
+     * @return the string after being processed with '+' wherever there were ' ' in the original string
+     */
+    public static String processSpaces(String input){
+        String output = "";
+        String space = "+";
+        
+        String[] words = input.split(" ");
+        output = words[0];
+        for(int i=1;i< words.length;i++){
+            output = output.concat(space+words[i]);
+        }
+        return output;      
+        
+     
+    }
+	
+    private String isEmpty(String input){
+    	if(input.isEmpty()){
+    		return "No Description";
+    	} else {
+    		return input;
+    	}
+    	
+    }
+    
+    private String addZero(int input){
+    	if(input < 10){
+    		
+    		return "0"+input;
+    	} else {
+    		return ""+input;
+    	}
+    }
+    
 
 }

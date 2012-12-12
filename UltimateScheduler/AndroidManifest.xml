@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".EventsActivity"></activity>
-        <activity android:name=".CreateEventActivity"></activity>
+        <activity android:name=".CreateEventActivity"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".CalendarActivity"></activity>
         <activity android:name=".EventDetailsActivity"></activity>
         <activity android:name=".SearchEventActivity"></activity>

@@ -1,7 +1,5 @@
 package com.mistypanda.ultimatescheduler.DBAccess;
 
-import java.util.List;
-
 import com.mistypanda.ultimatescheduler.Event;
 
 import android.content.ContentValues;
@@ -16,7 +14,7 @@ public class LocalDBAdapter {
 
 	private static final String DATABASE_NAME = "LittlePanda.db";
 	private static final int DATABASE_VERSION = 1;
-	private static final String TABLE_NAME = "events";
+	private static final String TABLE_NAME = "myEvents";
 
 	// The index (key) column name for use in where clauses.
 	private static final String KEY_ID = "id";
@@ -40,14 +38,13 @@ public class LocalDBAdapter {
 	eventInfo + " TEXT NOT NULL, " +
 	eventVersion + " INTEGER NOT NULL);";
 
-
 	private final Context context;
-	private LocalDBHelper DBHelper;
-	private SQLiteDatabase db;
+	private LocalDBHelper DatabaseHelper;
+	private static SQLiteDatabase db;
 
 	public LocalDBAdapter(Context ctx){
 		this.context = ctx;
-		DBHelper = new LocalDBHelper(context);
+		DatabaseHelper = new LocalDBHelper(context);
 	}
 
 
@@ -77,16 +74,16 @@ public class LocalDBAdapter {
 
 	//Opens the database
 	public LocalDBAdapter open() throws SQLException{
-		db = DBHelper.getWritableDatabase();
+		db = DatabaseHelper.getWritableDatabase();
 		return this;
 	}
 
 	//Closes the database
 	public void close(){
-		DBHelper.close();
+		DatabaseHelper.close();
 	}
 	
-	public long insertEvent(Event event) throws SQLException{
+	public static long insertEvent(Event event) throws SQLException{
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID, event.getID());
 		values.put(eventName, event.getEventName());
@@ -99,8 +96,8 @@ public class LocalDBAdapter {
 		Log.d(Tag, "Event version number: "+ event.getVersion());
 		return db.insert(TABLE_NAME, null, values);
 	}
-	
-	public long insertAllEvents(List<Event> eventList) throws SQLException{
+	/**
+	public static long insertAllEvents(List<Event> eventList) throws SQLException{
 		ContentValues values = new ContentValues();
 		Event tempEvent = null;
 		long count = 0;
@@ -119,12 +116,13 @@ public class LocalDBAdapter {
 		}
 		return count;
 	}
-
+	*/
+	
 	public boolean deleteEvent(long eventID) throws SQLException{
 		return(db.delete(TABLE_NAME, KEY_ID + " = " + eventID, null) > 0);
 	}
 	
-	public Cursor getEvent(long eventID){		
+	public static Cursor getEvent(long eventID){		
 		Cursor cursor =
 			db.query(true, TABLE_NAME, new String[] {KEY_ID, eventName,
 					eventLocation, eventHost, eventStartDate, eventEndDate, eventInfo, eventVersion},
@@ -135,9 +133,13 @@ public class LocalDBAdapter {
 			return cursor;
 	}
 	
-	public Cursor getAllEvents(){
+	public static Cursor getAllEvents(){
 		return db.query(TABLE_NAME, new String[] {KEY_ID, eventName,
 				eventLocation, eventHost, eventStartDate, eventEndDate, eventInfo, eventVersion}, null, null, null, null,null);
+	}
+	
+	public static Cursor getVersions(){
+		return db.query(TABLE_NAME, new String[] {KEY_ID, eventVersion}, null, null, null, null,null);
 	}
 
 	//Return the count of events in the local SQLite database

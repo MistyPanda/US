@@ -49,6 +49,7 @@ public class Event implements Serializable{
 	/**
 	 * Constructor for the event class. takes strings for the event name, location, host and information. 
 	 * it also requires a start and end date for the event 
+	 * will throw an exception with a relevent error message for the first possible conflict 
 	 * 
 	 * @param iD
 	 * @param eventName
@@ -58,21 +59,27 @@ public class Event implements Serializable{
 	 * @param endDate
 	 * @param info
 	 * @param version
+	 * @throws Exception 
 	 */
 	public Event(int iD, String eventName, String location, String host, DateTime startDate,
-			DateTime endDate, String info, int version) {
+			DateTime endDate, String info, int version, String password) throws Exception {
 		
 		this.ID = iD;
-		this.EventName = eventName;
-		this.Location = location;
-		this.Host = host;
+		
+		// these need to be valid input
+			setEventName(eventName);
+			setLocation(location);
+			setHost(host);
+			setInfo(info);
+			setPassword(password);
+		
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.Info = info;
 		this.Version = version;
 		//mediaAlbum = new MediaAlbum(null, null);
 	}
 	
+
 	/**
 	 * @return the iD
 	 */
@@ -95,14 +102,15 @@ public class Event implements Serializable{
 	}
 
 	/** 
-	 * 
+	 * Tests for valid input and sets the event name
+	 * will throw an exception with a relevent error message for the first possible conflict
 	 * @param eventName the eventName to set
 	 * @throws Exception 
 	 */
 	void setEventName(String eventName) throws Exception {
 		if(validateStrings(eventName))
 		EventName = eventName;
-		else throw new Exception("invalid input!");
+		else throw new Exception("Event name invalid input! cannot be an empty string!");
 	}
 
 	/**
@@ -113,13 +121,15 @@ public class Event implements Serializable{
 	}
 
 	/**
+	 * Tests for valid input and sets the event location
+	 * will throw an exception with a relevent error message for the first possible conflict
 	 * @param location the location to set
 	 * @throws Exception 
 	 */
 	void setLocation(String location) throws Exception {
 		if(validateStrings(location))
 			Location = location;
-			else throw new Exception("invalid input!");
+			else throw new Exception("Location invalid input! cannot be an empty string");
 	}
 
 	/**
@@ -130,13 +140,14 @@ public class Event implements Serializable{
 	}
 
 	/**
+	 * Tests for valid input and sets the event information
+	 * will throw an exception with a relevent error message for the first possible conflict
 	 * @param info the info to set
 	 * @throws Exception 
 	 */
-	void setInfo(String info) throws Exception {
+	void setInfo(String info) {
 		if(validateStrings(info))
 			Info = info;
-			else throw new Exception("invalid input!");
 	}
 
 	/**
@@ -147,23 +158,49 @@ public class Event implements Serializable{
 	}
 
 	/**
+	 * Tests for valid input and sets the event host
+	 * will throw an exception with a relevent error message for the first possible conflict
 	 * @param host the host to set
 	 * @throws Exception 
 	 */
 	void setHost(String host) throws Exception {
 		if(validateStrings(host))
 		Host = host;
-		else throw new Exception("invalid input!");
+		else throw new Exception("Event Host invalid input! cannot be an empty string");
 		
+	}
+	/**
+	 * 
+	 * String
+	 * @return
+	 */
+	String getPassword(){
+		return password;
+	}
+	
+	/**
+	 * Tests for valid input and sets the event password for editing purposes
+	 * will throw an exception with a relevent error message for the first possible conflict
+	 * void
+	 * @param pass
+	 * @throws Exception 
+	 */
+	void setPassword(String pass) throws Exception {
+		if(!validateStrings(pass)){
+			throw new Exception("Password invalid input! password cannot be an empty string");
+		}
+		else if(!(pass.length()<=25)){
+			throw new Exception("Password invalid input! password must be less than 26 characters");	
+		}
+		else{// valid information
+			password = pass;
+		}
 	}
 	
 	public int getVersion(){
 		return Version;
 	}
 	
-	public void incrementVersion(){
-		Version++;
-	}
 
 	/**
 	 * this method will ensure that a string exists for the input 
@@ -208,7 +245,7 @@ public class Event implements Serializable{
 		this.endDate = endDate;
 	}
 
-
+	
 	
 	public boolean getPhoto(){	return false;	}
 	public boolean getVideo(){	return false;	}

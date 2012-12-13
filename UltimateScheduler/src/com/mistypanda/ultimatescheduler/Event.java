@@ -62,6 +62,7 @@ public class Event implements Serializable{
 	 * @param endDate
 	 * @param info
 	 * @param version
+	 * @param password
 	 * @throws Exception 
 	 */
 	public Event(int iD, String eventName, String location, String host, String startDate,

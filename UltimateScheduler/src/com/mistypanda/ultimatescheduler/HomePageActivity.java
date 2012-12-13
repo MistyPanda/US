@@ -15,7 +15,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +39,10 @@ public class HomePageActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-
+		
+		
+		
+		
 		try {
 			String destPath = "/data/data/" + getPackageName() +
 			"/databases/LittlePanda.db";
@@ -65,6 +70,7 @@ public class HomePageActivity extends Activity {
 	
 	    // TODO Auto-generated method stub
 	}
+	
 
 	public void eventsClick(View view){
 		Intent intent=new Intent(this, EventsActivity.class);
@@ -75,6 +81,11 @@ public class HomePageActivity extends Activity {
 	public void savedEventsClick(View view){
 		Intent intent = new Intent(this, SavedEventsActivity.class);
 		startActivity(intent);
+	}
+	public void onSettingsClick(View view){
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivity(intent);
+		
 	}
 	
 

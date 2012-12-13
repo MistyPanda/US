@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import org.joda.time.DateTime;
 
-public class EventDetailsActivity extends Activity {
+public class SavedEventDetailsActivity extends Activity {
 	private static final int CAMERA_PIC_REQUEST = 3344;
 	/** Called when the activity is first created. */
 	MediaAlbum mediaAlbum;
@@ -55,20 +55,20 @@ public class EventDetailsActivity extends Activity {
 	    	System.out.println(e.getMessage());
 	    	
 	    }
-	   setContentView(R.layout.eventdetails);
+	   setContentView(R.layout.savedeventdetails);
 	   
-	   TextView name = (TextView) findViewById(R.id.eventNameDetails);
+	   TextView name = (TextView) findViewById(R.id.savedeventNameDetails);
 	   name.setText(event.getEventName());
-	   TextView location = (TextView) findViewById(R.id.location);
+	   TextView location = (TextView) findViewById(R.id.savedlocation);
 	   location.setText(event.getLocation());
-	   TextView host = (TextView) findViewById(R.id.Host);
+	   TextView host = (TextView) findViewById(R.id.savedHost);
 	   host.setText(event.getHost());
-	   TextView startDate = (TextView) findViewById(R.id.StartDate);
+	   TextView startDate = (TextView) findViewById(R.id.savedStartDate);
 	   startDate.setText(event.getStartDate().toString());
-	   TextView endDate = (TextView) findViewById(R.id.EndDate);
+	   TextView endDate = (TextView) findViewById(R.id.savedEndDate);
 	   endDate.setText(event.getLocation());
 	   
-	   TextView info = (TextView) findViewById(R.id.Info);
+	   TextView info = (TextView) findViewById(R.id.savedInfo);
 	   info.setText(event.getInfo());
 	   
 	   getPictures();
@@ -76,7 +76,7 @@ public class EventDetailsActivity extends Activity {
 	}
 	
 	 void getPictures(){
-		 View view = (View)findViewById(R.id.images);
+		 View view = (View)findViewById(R.id.savedimages);
 		  photoFactory = new PhotoFactory(view, mediaAlbum, this);
 		  photoFactory.start();
 		  
@@ -141,6 +141,24 @@ public class EventDetailsActivity extends Activity {
 				// show it
 				alertDialog.show();
 				
+	}
+	
+	public void onDeleteClick(View view){
+		LocalDBAdapter db = new LocalDBAdapter(this);
+		try{
+			db.open();
+			System.out.println("Here2");
+		   LocalDBAdapter.deleteEvent(event.getID());
+			System.out.println("Here3");
+			db.close();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		Intent intent = new Intent(this, SavedEventsActivity.class);
+		startActivity(intent);
+		this.onDestroy();
+	
 	}
 	public void onSaveEventClick(View view){
 		//add event to database
@@ -238,7 +256,7 @@ private void editEvent(){
 		    bitmap = (Bitmap) extras.get("data");
 		    
 		    //write to socket
-		    PictureSaver pictureSaver = new PictureSaver(bitmap, mediaAlbum, event.getID(), this);
+		    PictureSaver pictureSaver = new PictureSaver(bitmap, mediaAlbum, event.getID(),this);
 		    pictureSaver.run();
 		    
 		    //then add to actual view;

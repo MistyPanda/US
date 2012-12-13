@@ -24,6 +24,8 @@ import com.mistypanda.ultimatescheduler.MediaAlbum;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -35,17 +37,26 @@ public class PictureSaver extends Thread {
 		int numThreads;
 		Bitmap bitmap;
 		Activity activity;
+		String address;
 		ArrayList<PhotoThread> threads;
 		   Socket socket = null;
 	        DataOutputStream out = null;
 	        BufferedReader in = null;
 	        int eId;
 		
-		public PictureSaver(Bitmap bitmap, MediaAlbum mediaAlbum,  int eId){
+		public PictureSaver(Bitmap bitmap, MediaAlbum mediaAlbum,  int eId, Activity activity){
 			this.bitmap = bitmap;
 			this.mediaAlbum=mediaAlbum;
 			this.activity = activity;
 			this.eId = eId;
+			
+			SharedPreferences prefs = activity.getSharedPreferences(
+				      "com.mistypanda.ultimatescheduler", Context.MODE_PRIVATE);
+			
+		
+
+			// use a default value using new Date()
+			address = prefs.getString("com.mistypanda.ultimatescheduler.HomePageActivity.serverAddress", "localhost"); 
 		
 		}
 		
@@ -59,7 +70,7 @@ public class PictureSaver extends Thread {
 	        	
 	        
 	        	//InetAddress address = InetAddress.getByName("152.65.35.115");
-	            socket = new Socket("152.65.35.128", 1880);
+	            socket = new Socket(address, 1880);
 	            out = new DataOutputStream(socket.getOutputStream());
 	            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	        } catch (UnknownHostException e) {

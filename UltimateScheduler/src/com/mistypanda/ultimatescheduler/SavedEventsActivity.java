@@ -68,7 +68,7 @@ public class SavedEventsActivity extends Activity// extends ListActivity
 	    
 	   EventListAdapter eventAdapter = new EventListAdapter(this,events);
 	   listView.setAdapter(eventAdapter);
-	   final Intent viewEventIntent = new Intent(this, EventDetailsActivity.class);
+	   final Intent viewEventIntent = new Intent(this, SavedEventDetailsActivity.class);
 	   listView.setOnItemClickListener(new OnItemClickListener() {
 	    	  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	    		  Event selectedEvent= events.get(position);

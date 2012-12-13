@@ -2,6 +2,8 @@ package com.mistypanda.ultimatescheduler;
 
 
 
+
+
 import java.io.File;
 
 import java.io.FileNotFoundException;
@@ -15,9 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,10 +39,7 @@ public class HomePageActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-		
-		
-		
-		
+
 		try {
 			String destPath = "/data/data/" + getPackageName() +
 			"/databases/LittlePanda.db";
@@ -70,7 +67,6 @@ public class HomePageActivity extends Activity {
 	
 	    // TODO Auto-generated method stub
 	}
-	
 
 	public void eventsClick(View view){
 		Intent intent=new Intent(this, EventsActivity.class);
@@ -81,11 +77,6 @@ public class HomePageActivity extends Activity {
 	public void savedEventsClick(View view){
 		Intent intent = new Intent(this, SavedEventsActivity.class);
 		startActivity(intent);
-	}
-	public void onSettingsClick(View view){
-		Intent intent = new Intent(this, SettingsActivity.class);
-		startActivity(intent);
-		
 	}
 	
 
@@ -132,22 +123,49 @@ public class HomePageActivity extends Activity {
 	/*
 	
 	/**
-	public void update(){
-		ArrayList<String> externalVersions = (ArrayList<String>) DBHelper.getEventVersions();
-		Cursor localVersions = LocalDBAdapter.getVersions();
-		localVersions.moveToFirst();
-		for(int i=0; i < externalVersions.size(); i++){
-			for(int j=0; j < localVersions.getCount(); j++){
-				String hold = externalVersions.get(i);
-				String[] parts = hold.split(",");
-				int eID = Integer.parseInt(parts[0]);
-				int version = Integer.parseInt(parts[1]);
-	
-				if(eID == localVersions.getInt(0)){
-					if()
-				}
-			}
+	 * this method will update the local database by finding 
+	 * and by updating events with a newer version
+	 * 
+	 * void
+	 * @throws Exception 
+	 * 
+	 */
+	public void updateDatabase() throws Exception{		
+		//get local event id's/ versions
+		ArrayList<String> list = new ArrayList<String>(cursorMethod(LocalDBAdapter.getAllEvents()));
+		//loop through local events
+		String id, version;
+		for(String event: list){
+			id = event.split(".")[0];
+			version = event.split(".")[1];			
+			// compare local and global versions
+			if(Integer.parseInt(version)<=DBHelper.getEvent(Integer.parseInt(id)).getVersion())
+				Toast.makeText(this, "Event ID "+id+" updated", Toast.LENGTH_LONG).show();
+			//LocalDBAdapter.updateEvent();
+			// update if global is newer version	
 		}
 	}
-	*/
+
+	/**
+	 * converts a cursor from the local database into an Arraylist strings 
+	 * a period separates the ID and version number
+	 * ArrayList<String>
+	 * @param cursor
+	 * @return the collection of id, version pairs
+	 * @throws Exception
+	 */
+	public ArrayList<String> cursorMethod(Cursor cursor) throws Exception{
+		String hold ="";
+		ArrayList<String> list = new ArrayList<String>();
+		if(cursor.moveToFirst()){
+			do{
+				hold = cursor.getInt(0)+"."+ //ID
+						cursor.getInt(7); 	//Version
+				list.add(hold);
+				
+			}while(cursor.moveToNext());
+		}
+		
+		return list;
+	}
 }

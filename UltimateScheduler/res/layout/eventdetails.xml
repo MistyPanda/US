@@ -1,131 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/eventdetailswrapper"
+    android:id="@+id/eventdetailsscrollwrapper"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#98AFC7"
-    android:orientation="vertical"
-     >
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
+        android:id="@+id/eventdetailswrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
         android:background="#98AFC7"
-        android:orientation="vertical"
-        tools:context=".CreateEventActivity" >
-
-        <TextView
-            android:id="@+id/eventNameDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="14dp"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="60dp" />
-
-        <!-- android:layout_below="@+id/textView1" -->
-
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="14dp"
-            android:text="Location"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/Host"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="14dp"
-            android:text="Host"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/StartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="14dp"
-            android:text="Start Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/EndDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="14dp"
-            android:text="End Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/Info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="14dp"
-            android:text="Details"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dp" />
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/addPictures"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:onClick="onAddPictureClick"
-        android:shadowColor="@color/white"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="4"
-        android:text="Add Pictures" />
-
-    <Button
-        android:id="@+id/editEvent"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:onClick="onEditEventClick"
-        android:shadowColor="@color/white"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="4"
-        android:text="Edit Event" />
-
-    <Button
-        android:id="@+id/saveToCal"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:onClick="onSaveEventClick"
-        android:shadowColor="@color/white"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="4"
-        android:text="Save Event " />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/images"
+            android:id="@+id/LinearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#98AFC7" >
-        </LinearLayout>
-    </HorizontalScrollView>
+            android:layout_marginBottom="10dp"
+            android:background="#98AFC7"
+            android:orientation="vertical"
+            tools:context=".CreateEventActivity" >
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/eventNameDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="10dp"
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="60dp" />
+
+            <!-- android:layout_below="@+id/textView1" -->
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:text="Location"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/Host"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:text="Host"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/StartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:text="Start Date"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/EndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:text="End Date"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/Info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="5dp"
+                android:text="Details"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addPictures"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:onClick="onAddPictureClick"
+            android:shadowColor="@color/white"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="4"
+            android:text="Add Pictures" />
+
+        <Button
+            android:id="@+id/editEvent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:onClick="onEditEventClick"
+            android:shadowColor="@color/white"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="4"
+            android:text="Edit Event" />
+
+        <Button
+            android:id="@+id/saveToCal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:onClick="onSaveEventClick"
+            android:shadowColor="@color/white"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="4"
+            android:text="Save Event " />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#98AFC7" >
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+</ScrollView>

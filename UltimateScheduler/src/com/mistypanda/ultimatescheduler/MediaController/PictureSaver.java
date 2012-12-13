@@ -51,7 +51,7 @@ public class PictureSaver extends Thread {
 			this.eId = eId;
 			
 			SharedPreferences prefs = activity.getSharedPreferences(
-				      "com.mistypanda.ultimatescheduler", Context.MODE_PRIVATE);
+				      "com.mistypanda.ultimatescheduler.HomePageActivity", Context.MODE_PRIVATE);
 			
 		
 

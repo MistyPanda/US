@@ -56,7 +56,7 @@ public class PictureSaver extends Thread {
 		
 
 			// use a default value using new Date()
-			address = prefs.getString("com.mistypanda.ultimatescheduler.serverAddress", "localhost"); 
+			address = prefs.getString("com.mistypanda.ultimatescheduler.HomePageActivity.serverAddress", "localhost"); 
 		
 		}
 		

@@ -113,7 +113,7 @@
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="4"
-        android:text="Save Event to Calendar" />
+        android:text="Save Event " />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"

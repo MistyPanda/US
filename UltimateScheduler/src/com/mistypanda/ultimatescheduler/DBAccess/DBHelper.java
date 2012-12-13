@@ -30,6 +30,7 @@ import com.mistypanda.ultimatescheduler.Event;
  */
 public class DBHelper {
 	
+	private static String tag = "DBHelper Debug";
 	
 	/** This method accesses the main external database and retrieves an event by ID.
 	 * @param eventID - The int ID for a specific event.
@@ -48,7 +49,9 @@ public class DBHelper {
 		//Resources.getSystem().getString(R.string.get_event);
 		
 		// Start background thread to access the database through php
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEvent.php?id="+eventID);
+		String getEvent = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/getEvent.php?id="+eventID);
+		Log.d(tag, "Attempted URL: "+getEvent);
+		task.execute(getEvent);
 		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
@@ -98,7 +101,9 @@ public class DBHelper {
 		Event event = null;
 		
 		// Start background thread to access the database through php
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllEvents.php");
+		String getAllEvents = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllEvents.php");
+		Log.d(tag, "Attempted URL: "+getAllEvents);
+		task.execute(getAllEvents);
 		task.get(30000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
@@ -155,8 +160,10 @@ public class DBHelper {
 		FetchTask task = new FetchTask();
 		
 		// Start background thread to access the database through php
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
-				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		String addEvent = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/addEvent.php?name="+eNam
+		+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		Log.d(tag, "Attempted URL: "+addEvent);
+		task.execute(addEvent);
 	}
 
 	/**
@@ -169,7 +176,9 @@ public class DBHelper {
 	 */
 	public static void deleteEvent(int eID, String password) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deleteEvent.php?id="+eID+"&pass="+password);
+		String deleteEvent = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/deleteEvent.php?id="+eID+"&pass="+password);
+		Log.d(tag, "Attempted URL: "+deleteEvent);
+		task.execute(deleteEvent);
 	}
 	
 	/**
@@ -189,8 +198,10 @@ public class DBHelper {
 			String eDat, String info, String password) throws InterruptedException, ExecutionException, TimeoutException{
 		
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
-				+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		String updateEvent = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/updateEvent.php?id="+eID+"&name="+eNam
+		+"&loc="+loc+"&host="+host+"&start="+sDat+"&end="+eDat+"&info="+info+"&pass="+password);
+		Log.d(tag, "Attempted URL: "+updateEvent);
+		task.execute(updateEvent);
 	}
 	
 	/**
@@ -202,7 +213,9 @@ public class DBHelper {
 	 */
 	public static void addPhoto(int eID, String filePath) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/addPhoto.php?id="+eID+"&path="+filePath);
+		String addPhoto = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/addPhoto.php?id="+eID+"&path="+filePath);
+		Log.d(tag, "Attempted URL: "+addPhoto);
+		task.execute(addPhoto);
 	}
 	
 	/**
@@ -214,7 +227,9 @@ public class DBHelper {
 	 */
 	public static List<String> getAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
+		String getAllPhotos = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/getAllPhotos.php?id="+eID);
+		Log.d(tag, "Attempted URL: "+getAllPhotos);
+		task.execute(getAllPhotos);
 		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		
@@ -243,7 +258,9 @@ public class DBHelper {
 	 */
 	public static void deletePhoto(int eID, String filepath) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID+"&path="+filepath);
+		String deletePhoto = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID+"&path="+filepath);
+		Log.d(tag, "Attempted URL: "+deletePhoto);
+		task.execute(deletePhoto);
 	}
 	
 	/**
@@ -254,7 +271,9 @@ public class DBHelper {
 	 */
 	public static void deleteAllPhotos(int eID) throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID);
+		String deleteAllPhotos = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/deletePhoto.php?id="+eID);
+		Log.d(tag, "Attempted URL: "+deleteAllPhotos);
+		task.execute(deleteAllPhotos);
 	}
 	
 	/**
@@ -265,7 +284,9 @@ public class DBHelper {
 	 */
 	public static List<String> getEventVersions() throws InterruptedException, ExecutionException, TimeoutException{
 		FetchTask task = new FetchTask();
-		task.execute("http://www.users.csbsju.edu/~symesfin/mistypanda/getEventVersions.php");
+		String getEventVersions = processSpaces("http://www.users.csbsju.edu/~symesfin/mistypanda/getEventVersions.php");
+		Log.d(tag, "Attempted URL: "+ getEventVersions);
+		task.execute(getEventVersions);
 		task.get(5000, TimeUnit.MILLISECONDS);
 		String result = task.getData();
 		List<String> versions = new ArrayList<String>();
@@ -300,6 +321,25 @@ public class DBHelper {
 		DateTime date = format.parseDateTime(stringDate);
 		return date;
 	}
+	
+     /** This method will take in any string input and replace all ' ' characters with the sequence "+"
+     * First it will locate the spaces in the string
+     * then it will replace spaces with the representation of space in php language  
+     * String
+     * @param input
+     * @return the string after being processed with '+' wherever there were ' ' in the original string
+     */
+    public static String processSpaces(String input){
+        String output = "";
+        String space = "+";
+        
+        String[] words = input.split(" ");
+        output = words[0];
+        for(int i=1;i< words.length;i++){
+            output = output.concat(space+words[i]);
+        }
+        return output;      
+    }
 
 	
 }

@@ -93,31 +93,20 @@ public class LocalDBAdapter {
 		values.put(eventEndDate, event.getEndDate().toString());
 		values.put(eventInfo, event.getInfo());
 		values.put(eventVersion, event.getVersion());
-		Log.d(Tag, "Event version number: "+ event.getVersion());
 		return db.insert(TABLE_NAME, null, values);
 	}
 	
-	/**
-	public static long insertAllEvents(List<Event> eventList) throws SQLException{
+	public static long updateEvent(Event event) throws SQLException{
 		ContentValues values = new ContentValues();
-		Event tempEvent = null;
-		long count = 0;
-		for(int i=0; i < eventList.size(); i++){
-			tempEvent = eventList.get(i);
-			values.put(KEY_ID, tempEvent.getID());
-			values.put(eventName, tempEvent.getEventName());
-			values.put(eventLocation, tempEvent.getLocation());
-			values.put(eventHost, tempEvent.getHost());
-			values.put(eventStartDate, tempEvent.getStartDate().toString());
-			values.put(eventEndDate, tempEvent.getEndDate().toString());
-			values.put(eventInfo, tempEvent.getInfo());
-			values.put(eventVersion, tempEvent.getVersion());
-			db.insert(TABLE_NAME, null, values);
-			count++;
-		}
-		return count;
+		values.put(eventName, event.getEventName());
+		values.put(eventLocation, event.getLocation());
+		values.put(eventHost, event.getHost());
+		values.put(eventStartDate, event.getStartDate().toString());
+		values.put(eventEndDate, event.getEndDate().toString());
+		values.put(eventInfo, event.getInfo());
+		values.put(eventVersion, event.getVersion());
+		return db.update(TABLE_NAME, values, KEY_ID, null);
 	}
-	*/
 	
 	public static boolean deleteEvent(long eventID) throws SQLException{
 		return(db.delete(TABLE_NAME, KEY_ID + " = " + eventID, null) > 0);

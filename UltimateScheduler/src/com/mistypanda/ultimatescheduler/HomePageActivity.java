@@ -7,15 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
@@ -57,29 +53,6 @@ public class HomePageActivity extends Activity {
 		LocalDBAdapter db = new LocalDBAdapter(this);
 		db.open();
 		db.close();
-		
-		try {
-			Event e1 = DBHelper.getEvent(2);
-			Event e2 = DBHelper.getEvent(3);
-			db.open();
-			LocalDBAdapter.insertEvent(e1);
-			LocalDBAdapter.insertEvent(e2);
-			displayRecord(LocalDBAdapter.getEvent(e1.getID()));
-			displayRecord(LocalDBAdapter.getEvent(e2.getID()));
-			db.close();
-		} catch(SQLException se){
-			se.getStackTrace();
-		}
-		catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TimeoutException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	    super.onCreate(savedInstanceState);
 	    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -126,24 +99,4 @@ public class HomePageActivity extends Activity {
 				Toast.LENGTH_SHORT).show();
 	}
 	
-	
-	/**
-	public void update(){
-		ArrayList<String> externalVersions = (ArrayList<String>) DBHelper.getEventVersions();
-		Cursor localVersions = LocalDBAdapter.getVersions();
-		localVersions.moveToFirst();
-		for(int i=0; i < externalVersions.size(); i++){
-			for(int j=0; j < localVersions.getCount(); j++){
-				String hold = externalVersions.get(i);
-				String[] parts = hold.split(",");
-				int eID = Integer.parseInt(parts[0]);
-				int version = Integer.parseInt(parts[1]);
-	
-				if(eID == localVersions.getInt(0)){
-					if()
-				}
-			}
-		}
-	}
-	*/
 }

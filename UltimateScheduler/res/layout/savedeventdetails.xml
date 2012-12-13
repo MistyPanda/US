@@ -18,7 +18,7 @@
         tools:context=".CreateEventActivity" >
 
         <TextView
-            android:id="@+id/eventNameDetails"
+            android:id="@+id/savedeventNameDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -27,12 +27,12 @@
             android:layout_marginRight="14dp"
             android:text="Name"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="60dp" />
+            android:textSize="35dp" />
 
         <!-- android:layout_below="@+id/textView1" -->
 
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/savedlocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -42,7 +42,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/Host"
+            android:id="@+id/savedHost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -52,7 +52,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/StartDate"
+            android:id="@+id/savedStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -62,7 +62,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/EndDate"
+            android:id="@+id/savedEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -72,7 +72,7 @@
             android:textSize="25dp" />
 
         <TextView
-            android:id="@+id/Info"
+            android:id="@+id/savedInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -94,26 +94,15 @@
         android:text="Add Pictures" />
 
     <Button
-        android:id="@+id/editEvent"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:onClick="onEditEventClick"
-        android:shadowColor="@color/white"
-        android:shadowDx="3"
-        android:shadowDy="3"
-        android:shadowRadius="4"
-        android:text="Edit Event" />
-
-    <Button
         android:id="@+id/saveToCal"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:onClick="onSaveEventClick"
+        android:onClick="onDeleteClick"
         android:shadowColor="@color/white"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="4"
-        android:text="Save Event to Calendar" />
+        android:text="Remove from Saved Events" />
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
@@ -121,7 +110,7 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/images"
+            android:id="@+id/savedimages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#98AFC7" >

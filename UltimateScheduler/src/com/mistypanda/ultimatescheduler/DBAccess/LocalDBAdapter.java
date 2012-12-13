@@ -119,7 +119,7 @@ public class LocalDBAdapter {
 	}
 	*/
 	
-	public boolean deleteEvent(long eventID) throws SQLException{
+	public static boolean deleteEvent(long eventID) throws SQLException{
 		return(db.delete(TABLE_NAME, KEY_ID + " = " + eventID, null) > 0);
 	}
 	

@@ -47,4 +47,14 @@
         android:textColor="@color/black"
         android:textSize="25sp" />
 
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_alignLeft="@+id/myCalendar"
+        android:layout_below="@+id/myCalendar"
+        android:layout_marginTop="17dp"
+        android:onClick="onSettingsClick"
+        android:text="Settings" />
+
 </RelativeLayout>

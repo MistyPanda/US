@@ -50,7 +50,7 @@ public class SavedEventsActivity extends Activity{ // extends ListActivity
 			eventsCursor = LocalDBAdapter.getAllEvents();
 		}  catch(Exception e){
 
-			System.out.println(e.getMessage());	
+			e.printStackTrace();	
 		}
 		try{
 
@@ -59,7 +59,7 @@ public class SavedEventsActivity extends Activity{ // extends ListActivity
 			events = cursorMethod(eventsCursor);
 		}  catch(Exception e){
 
-			System.out.println(e.getMessage());	
+			e.printStackTrace();
 		}
 
 

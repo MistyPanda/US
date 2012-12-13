@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/homepageLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#98AFC7"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/settingsTitle"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:gravity="left"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="70dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="Picture Server Address"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/serverAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:onClick="onSave"
+        android:text="Save" />
+
+</LinearLayout>

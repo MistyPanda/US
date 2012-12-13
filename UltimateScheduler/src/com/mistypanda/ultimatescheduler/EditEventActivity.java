@@ -75,7 +75,7 @@ public class EditEventActivity extends Activity{
 		 host = (EditText)findViewById(R.id.editeventHostET);
 		location = (EditText)findViewById(R.id.editlocationET);
 		 description = (EditText)findViewById(R.id.editdescriptionET);
-		 pword = (EditText)findViewById(R.id.editenterPassword);
+		// pword = (EditText)findViewById(R.id.editenterPassword);
 		
 		startDate = (TextView)findViewById(R.id.showStartDate);
 		endDate = (TextView)findViewById(R.id.showEndDate);
@@ -86,7 +86,7 @@ public class EditEventActivity extends Activity{
 	    host.setText(event.getHost());
 	    location.setText(event.getLocation());
 	    description.setText(event.getInfo());
-	    pword.setText(event.getPassword());
+	    //pword.setText(event.getPassword());
 	    
 	    /*
 	     *  Set secondTime listener and set them to the appropriate buttons and textviews
@@ -271,7 +271,23 @@ public class EditEventActivity extends Activity{
        return null;
     }  
     
- 
+    public void onDeleteClick(View view){
+    	try {
+			DBHelper.deleteEvent(event.getID(), event.getPassword());
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	Intent intent=new Intent(this, EventsActivity.class);
+    	startActivity(intent);
+    	this.onDestroy();
+    }
 	
 	public void createClick(View view){
 		
@@ -286,7 +302,7 @@ public class EditEventActivity extends Activity{
 		String eStart = startDate.getText().toString();
 		String eEnd = endDate.getText().toString();
 		String descrip = processSpaces(isEmpty(description.getText().toString()));
-		String password = processSpaces(pword.getText().toString());
+		String password = event.getPassword();
 		String sTime = startTime.getText().toString();
 		String eTime = endTime.getText().toString();
 		
@@ -309,8 +325,9 @@ public class EditEventActivity extends Activity{
 			 * @param info
 			 * @param password
 			 **/
+			
 			DBHelper.updateEvent(event.getID(),eNam, eLoc, eHost, startDateTime, endDateTime, descrip, password);
-			//DBHelper.addEvent("Hello", "omg", "lol", "2015-5-15", "2016-5-23", "penis", "hellomyname+is+senai");
+			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

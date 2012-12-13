@@ -11,6 +11,8 @@ import com.mistypanda.ultimatescheduler.MediaAlbum;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
@@ -21,6 +23,7 @@ public class PhotoFactory extends Thread {
 		int numThreads;
 		ArrayList<PhotoThread> threads;
 		Activity activity;
+		String address;
 		public boolean isThreadsDone(){
 			int done =0;
 			for(int i=0;i<numThreads;i++){
@@ -40,6 +43,13 @@ public class PhotoFactory extends Thread {
 			this.mediaAlbum=mediaAlbum;
 			this.numThreads=mediaAlbum.getNumPhotos();
 			this.activity = activity;
+			SharedPreferences prefs = activity.getSharedPreferences(
+				      "com.mistypanda.ultimatescheduler.HomePageActivity", Context.MODE_PRIVATE);
+			
+		
+
+			// use a default value using new Date()
+			address = prefs.getString("com.mistypanda.ultimatescheduler.HomePageActivity.serverAddress", "localhost"); 
 		
 		}
 		
@@ -48,7 +58,7 @@ public class PhotoFactory extends Thread {
 			 threads = new ArrayList<PhotoThread>();
 			for(int i=0;i<mediaAlbum.getNumPhotos();i++){
 				//create and initialize a thread for each picture
-				threads.add(new PhotoThread(photoContainer, "http://152.65.35.128/"+ mediaAlbum.getPhoto(i), activity ) );
+				threads.add(new PhotoThread(photoContainer, "http://"+address+"/"+ mediaAlbum.getPhoto(i), activity ) );
 				threads.get(i).start();
 			}
 			

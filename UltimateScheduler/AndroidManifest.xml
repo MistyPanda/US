@@ -36,7 +36,8 @@
         <activity android:name=".EditEventActivity"></activity>
         <activity android:name=".SavedEventsActivity"></activity>
         <activity android:name=".SavedEventDetailsActivity"></activity>
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity">
+        </activity>
         
     </application>
 </manifest>

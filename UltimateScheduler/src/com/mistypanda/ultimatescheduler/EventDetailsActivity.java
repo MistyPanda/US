@@ -142,28 +142,24 @@ public class EventDetailsActivity extends Activity {
 				alertDialog.show();
 				
 	}
+	
 	public void onSaveEventClick(View view){
 		//add event to database
 		
 		
 		//add notification to ask user about adding events
 		//AlertDialog alert = new AlertDialog(getContext());
-		System.out.println("Here1");
 	
 		LocalDBAdapter db = new LocalDBAdapter(this);
 		try{
 			db.open();
-			System.out.println("Here2");
 			LocalDBAdapter.insertEvent(event);
-			System.out.println("Here3");
 			db.close();
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
 		
-		
-		System.out.println("Here4");
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 				this);
  
@@ -216,11 +212,7 @@ public class EventDetailsActivity extends Activity {
 		
 		
 	}
-	
-private void editEvent(){
-		
-	
-	}
+
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {  
 	    //first test for camera

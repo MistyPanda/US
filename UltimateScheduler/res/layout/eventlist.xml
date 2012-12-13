@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#98AFC7" >
+    android:layout_height="fill_parent"
+    android:background="#98AFC7"
+    android:orientation="vertical" >
 
     <Button
         android:id="@+id/createEventButton"
@@ -25,11 +25,11 @@
         android:layout_height="40dp"
         android:onClick="onSearchClick"
         android:text="Search for Event" />
-
+
     <ListView
         android:id="@+id/eventListView"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#98AFC7"
         tools:context=".CreateEventActivity" >
 

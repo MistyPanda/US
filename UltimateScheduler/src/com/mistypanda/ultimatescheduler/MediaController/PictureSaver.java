@@ -30,20 +30,30 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
-
+/*
+ * BVF
+ * A thread to save a picture to the picture server and recieve a string with the name of the newly saved file
+ */
 public class PictureSaver extends Thread {
-		View photoContainer;
-		MediaAlbum mediaAlbum;
-		int numThreads;
-		Bitmap bitmap;
-		Activity activity;
-		String address;
-		ArrayList<PhotoThread> threads;
-		   Socket socket = null;
-	        DataOutputStream out = null;
-	        BufferedReader in = null;
-	        int eId;
 		
+		View photoContainer;//view to add the picture to
+		MediaAlbum mediaAlbum;//collection of pictures associated with this event
+		Bitmap bitmap;//picture data
+		Activity activity;//calling activity
+		String address;//address to bind the socket to
+		Socket socket = null;//new socket
+	    DataOutputStream out = null;//stream needed for output
+	    BufferedReader in = null;//stream needed for input
+	    int eId;//eid of associated event
+		
+	    
+	    /**
+	     * 
+	     * @param bitmap bitmap data of file to save
+	     * @param mediaAlbum media album to add the filename to
+	     * @param eId eId of the event associated with the picture
+	     * @param activity calling activity
+	     */
 		public PictureSaver(Bitmap bitmap, MediaAlbum mediaAlbum,  int eId, Activity activity){
 			this.bitmap = bitmap;
 			this.mediaAlbum=mediaAlbum;
@@ -60,67 +70,67 @@ public class PictureSaver extends Thread {
 		
 		}
 		
+		
+		//what happens when this thread runs
 		public void run(){
 			Log.d("opeining socket", "Running socket writing thread thread");
 			
 
 	     
-
+			
 	        try {
 	        	
 	        
-	        	//InetAddress address = InetAddress.getByName("152.65.35.115");
+	        	//open a socket
 	            socket = new Socket(address, 1880);
+	            
+	            
+	            //create output and input streams and readers 
 	            out = new DataOutputStream(socket.getOutputStream());
 	            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 	        } catch (UnknownHostException e) {
 	        	 e.printStackTrace();
-	           Log.d("blah ", "Don't know about host: taranis.");
+	           Log.d("Starting Socket", "Don't know about host");
 	            System.exit(1);
 	        } catch (IOException e) {
 	        	 e.printStackTrace();
-	        	 Log.d("blah ", "Don't know about host: taranis2.");
+	        	 Log.d("Starting Socket ", "I/O on socket is bad");
 	            System.exit(1);
 	        }
+	        
+	        
 	        //convert picture to byte array
 	        ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, MAX_PRIORITY, stream);
             
             byte[] byteArray = stream.toByteArray();
             
-           // send byte array to socket;
+           
 	        try{
-	        	
+	        	// send byte array to socket;
 	        	out.write(byteArray);
-	        
-	        	
 	        	out.flush();
 	        	
-	        	
+	        	//wait for server to send response
 	        	waitOnResponse();
+	        	
+	        	//close streams and sockets
 	        	out.close();
 	 	        socket.close();
 	        }
 	        catch(Exception e){
 	        	 e.printStackTrace();
-	        	 Log.d("blah ", "Don't know about host: taranis3.");
+	        	 Log.d("SocketWriting ", "Problem with transfering data between the socket");
 	        }
-	        
-	        
-	        
-	        
-	        
-			
-			
-			//check if threads are done.			
-
-			
+	  
 	       
 			
 		}
 		
+		//waits on response from server and stores the file name sent in file name. then adds the file to media album
 		void waitOnResponse(){
 			String newFile= "";
+			//keep looping until it gets response from server
 			while(newFile=="" || newFile==null){
 				System.out.println("about to try reading from socket");
 				try{
@@ -132,6 +142,7 @@ public class PictureSaver extends Thread {
 				}
 			
 		}
+			//add picture to media album in database and app.
 			System.out.println("Finsihed reading. New file is : " + newFile);
 			 mediaAlbum.addPic(eId, newFile);
 		}

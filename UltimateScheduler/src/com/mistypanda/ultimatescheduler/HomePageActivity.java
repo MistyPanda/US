@@ -89,9 +89,11 @@ public class HomePageActivity extends Activity {
 		startActivity(intent);
 	}
 
+	
 	public void onSettingsClick(View view){
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
+	
 	}
 
 

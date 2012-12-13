@@ -64,15 +64,13 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				String start = json_data.getString("eStartDate");
-				String end = json_data.getString("eEndDate");
-				//DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				//DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String startDate = json_data.getString("eStartDate");
+				String endDate = json_data.getString("eEndDate");
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, start, end, info, version, pass);
+				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
 			}
 		}
 		catch(JSONException je){
@@ -116,15 +114,13 @@ public class DBHelper {
 				String eventName = json_data.getString("eName");
 				String location = json_data.getString("eLocation");
 				String host = json_data.getString("eHost");
-				String start = json_data.getString("eStartDate");
-				String end = json_data.getString("eEndDate");
-				//DateTime startDate = parseDate(json_data.getString("eStartDate"));
-				//DateTime endDate = parseDate(json_data.getString("eEndDate"));
+				String startDate = json_data.getString("eStartDate");
+				String endDate = json_data.getString("eEndDate");
 				String info = json_data.getString("eInfo");
 				int version = json_data.getInt("eVersion");
 				String pass = json_data.getString("password");
 				
-				event = new Event(eID, eventName, location, host, start, end, info, version, pass);
+				event = new Event(eID, eventName, location, host, startDate, endDate, info, version, pass);
 				eventList.add(event);
 			}
 		}

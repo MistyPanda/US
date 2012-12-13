@@ -93,6 +93,12 @@ public class HomePageActivity extends Activity {
 		startActivity(intent);
 
 	}
+	
+	public void savedEventsClick(View view){
+		Intent intent = new Intent(this, SavedEventsActivity.class);
+		startActivity(intent);
+	}
+	
 
 	public void CopyDB(InputStream inputStream, OutputStream outputStream) throws IOException {
 		//---copy 1K bytes at a time---

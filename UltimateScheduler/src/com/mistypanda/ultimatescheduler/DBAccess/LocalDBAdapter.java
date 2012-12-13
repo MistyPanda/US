@@ -105,7 +105,7 @@ public class LocalDBAdapter {
 		values.put(eventEndDate, event.getEndDate().toString());
 		values.put(eventInfo, event.getInfo());
 		values.put(eventVersion, event.getVersion());
-		return db.update(TABLE_NAME, values, KEY_ID, null);
+		return db.update(TABLE_NAME, values, KEY_ID + " = "+event.getID(), null);
 	}
 	
 	public static boolean deleteEvent(long eventID) throws SQLException{
@@ -129,7 +129,11 @@ public class LocalDBAdapter {
 	}
 	
 	public static Cursor getVersions(){
-		return db.query(TABLE_NAME, new String[] {KEY_ID, eventVersion}, null, null, null, null,null);
+		Cursor c =  db.query(TABLE_NAME, new String[] {KEY_ID, eventVersion}, null, null, null, null,null);
+		if (c != null) {
+			c.moveToFirst();
+			}
+		return c;
 	}
 
 	//Return the count of events in the local SQLite database

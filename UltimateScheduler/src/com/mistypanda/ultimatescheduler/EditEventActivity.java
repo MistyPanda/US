@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -274,6 +275,16 @@ public class EditEventActivity extends Activity{
 	public void onDeleteClick(View view){
 		try {
 			DBHelper.deleteEvent(event.getID(), event.getPassword());
+			LocalDBAdapter db = new LocalDBAdapter(this);
+			db.open();
+			Cursor c = LocalDBAdapter.getEvent(event.getID());
+			if(c.moveToFirst()){
+				if(c.getInt(0) == event.getID()){
+					Log.d("TAG", "Attempting to delete event from local list.");
+					LocalDBAdapter.deleteEvent(event.getID());
+				}
+			}
+			db.close();	
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
